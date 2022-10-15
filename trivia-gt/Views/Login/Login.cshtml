@@ -1,0 +1,60 @@
+﻿@model trivia_gt.Models.UsuarioBE
+
+@{
+    Layout = null;
+}
+
+<html lang="en">
+<!--begin::Head-->
+<head>
+    <base href="../../../../">
+    <meta charset="utf-8">
+    <title>Trivia Guatemala | Ingreso</title>
+    <link rel="icon" type="image/x-icon" href="~/images/guate.ico">
+    <meta name="description" content="Login Page TRIVIA">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#563d7c">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/signin.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/notify/notiflix-3.2.5.min.css" asp-append-version="true" />
+
+
+
+</head>
+
+
+<body background-color: #666!important" class="text-center">
+
+    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-floating", Id = "frmLogin" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <main class="form-signin" style="background-color:#FFC107!important">
+            <img class="mb-4" src="~/images/trivia-gt.png">
+            <h1 class="h3 mb-3 fw-normal">Ingrese sus credenciales</h1>
+
+            <div class="form-floating">
+                @Html.TextBoxFor(model => model.Correo, new { @class = "form-control", placeholder = "Correo", autocomplete = "off", id = "txtUser" })
+                <label for="txtUser">Correo Electronico</label>
+            </div>
+            <div class="form-floating">
+                @Html.PasswordFor(model => model.Clave, new { @class = "form-control mt-1", placeholder = "Contraseña", autocomplete = "off", id = "txtPass" })
+
+                <label for="txtPass">Contraseña</label>
+            </div>
+
+            <button id="btnIngreso" class="btn btn-lg btn-primary btn-block" type="button">Ingresar</button>
+
+        </main>
+
+    }
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/notify/notiflix-notify-aio-3.2.5.min.js"></script>
+    <script src="~/js/login.js" asp-append-version="true"></script>
+
+</body>
+</html>

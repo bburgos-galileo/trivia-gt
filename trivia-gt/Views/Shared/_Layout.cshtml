@@ -1,0 +1,84 @@
+﻿@{
+    string nombres = ViewBag.Nombres;
+    string image = ViewBag.Imagen;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trivia Guatemala</title>
+    <link rel="icon" type="image/x-icon" href="~/images/guate.ico">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/notify/notiflix-3.2.5.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css"/>
+</head>
+<body>
+
+    <div class="jumbotron-fluid">
+        <div class="container-fluid ">
+        <div class="row flex-nowrap">
+            <div class="col-auto px-0">
+                <div id="sidebar" class="collapse collapse-horizontal show border-end">
+                    <div class="sidebar-heading border-bottom bg-warning">
+                        <div class="card align-content-center text-center bg-warning">
+                                <img class="w-50 h-auto rounded card-img-top mx-auto d-block" src="@image">
+                            <div class="card-body">
+                                <p class="card-text text-success font-weight-bold">@nombres</p>
+                            </div>
+                        </div>
+                    </div>
+                        <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start bg-warning min-vh-100">
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-user"></i> <span>Mi Perfil</span> </a>
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-users"></i> <span>Mis Amigos</span></a>
+                        <a href="@Url.Action("Index", "Preguntas")" " class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-gears"></i> <span>Configuración</span></a>
+                        <a href="@Url.Action("Logout", "Login")" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar Session</span></a>
+                    </div>
+                </div>
+            </div>
+                <div class="col p-0 m-0">
+
+                  <nav class="navbar navbar-expand-lg navbar-light bg-warning border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle" data-bs-target="#sidebar" data-bs-toggle="collapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+
+                        <span class="navbar-text font-weight-bold" style="font-size:large!important">
+                            Nivel <span class="badge bg-success" style="font-size:large!important">9</span>
+                        </span>
+
+                        <div class="progress" style="width: 25em; height: 20px;">
+                            <!-- 25em = half the screen width -->
+                            <div class="progress-bar" style="width:70%">70%</div>
+                        </div>
+
+                    </div>
+
+                </nav>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container-fluid">
+                            <main role="main" class="pb-3">
+                                @RenderBody()
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.js"></script>
+    <script src="~/js/notify/notiflix-notify-aio-3.2.5.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
