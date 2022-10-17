@@ -98,6 +98,7 @@ namespace trivia_gt
 
         public static void GrabaPreguntasCache(this ISession session, object value)
         {
+            session.Remove("preguntas");
             session.SetString("preguntas", JsonConvert.SerializeObject(value));
         }
 

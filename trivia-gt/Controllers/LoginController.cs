@@ -9,19 +9,7 @@ namespace trivia_gt.Controllers
     public class LoginController : Controller
     {
         [HttpGet]
-        public IActionResult Login()
-        {
-
-            List<PreguntaBE>? lista = Utilities.ListarPreguntas();
-
-            Utilities.GrabaPreguntasCache(HttpContext.Session, lista);
-
-            lista.Clear();
-
-            lista = Utilities.ObtienePreguntasCache<List<PreguntaBE>>(HttpContext.Session);
-
-            return View();
-        }
+        public IActionResult Login() => View();
 
         [HttpPost]
         [Produces("application/json")]

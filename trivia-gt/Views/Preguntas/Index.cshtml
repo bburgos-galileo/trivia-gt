@@ -2,28 +2,30 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-10">
-        <form asp-action="Grabar" class="form-horizontal">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Grabar", "Preguntas", FormMethod.Post, new { @class = "form-floating", Id = "frmPreguntas" }))
+        {
             @Html.HiddenFor(model => model.idPregunta, new { @id = "hdIdPregunta" })
             <div class="form-group">
-                <h4 class="h4 text-success">@Model.pregunta</h4>
+                <h4 class="h3 text-success">@Model.pregunta</h4>
             </div>
 
-
+            <div class="form-group">
             @foreach (var item in Model.respuestas)
             {
                 <div class="form-check">
-                    @Html.RadioButtonFor(model => model.idRespuesta, item.idRespuesta, new { @class = "form-check-input", id = item.idRespuesta})
-
-
-                    <label class="form-check-label" for="@item.idRespuesta">@item.text</label>
+                    @Html.RadioButtonFor(model => model.idRespuesta, item.idRespuesta, new { @class = "form-check-input fs-4", id = item.idRespuesta})
+                    <label class="form-check-label fs-4" for="@item.idRespuesta">@item.text</label>
                 </div>
             }
-
-
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-        </form>
+
+            <div class="form-group mt-2 float-end">
+                <div class="btn-group" role="group" aria-label="opciones">
+                    <input id="btnGrabar" onclick="GrabarPregunta()" type="button" value="Validar" class="btn btn-lg btn-group-lg btn-outline-primary" />
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-lg btn-group-lg btn-outline-success ms-2">Salir</a>
+                </div>
+            </div>
+        }
     </div>
 </div>

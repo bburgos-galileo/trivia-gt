@@ -1,8 +1,30 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Menu";
+    string imageLibro = ViewBag.ImagenLibro;
+    string imageAnimo = ViewBag.ImagenAnimo;
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    
+    
+
+    <div class="card-group mt-5">
+        <div class="card float-start">
+            <div class="card-img-top">
+                <img src="@imageAnimo" class="w-50 h-auto rounded">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Ultima conexión</h5>
+            </div>
+        </div>
+        <div class="card float-end">
+            <div class="card-img-top">
+                <img src="@imageLibro" class="w-50 h-auto rounded">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><a href="@Url.Action("Index", "Preguntas")">Jugar</a></h5>
+            </div>
+        </div>
+    </div>
+
 </div>

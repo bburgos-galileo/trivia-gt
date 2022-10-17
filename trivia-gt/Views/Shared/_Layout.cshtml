@@ -24,7 +24,7 @@
                 <div id="sidebar" class="collapse collapse-horizontal show border-end">
                     <div class="sidebar-heading border-bottom bg-warning">
                         <div class="card align-content-center text-center bg-warning">
-                                <img class="w-50 h-auto rounded card-img-top mx-auto d-block" src="@image">
+                            <img class="w-50 h-auto rounded card-img-top mx-auto d-block" src="@image">
                             <div class="card-body">
                                 <p class="card-text text-success font-weight-bold">@nombres</p>
                             </div>
@@ -33,7 +33,7 @@
                         <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start bg-warning min-vh-100">
                         <a href="#" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-user"></i> <span>Mi Perfil</span> </a>
                         <a href="#" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-users"></i> <span>Mis Amigos</span></a>
-                        <a href="@Url.Action("Index", "Preguntas")" " class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-gears"></i> <span>Configuración</span></a>
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-gears"></i> <span>Configuración</span></a>
                         <a href="@Url.Action("Logout", "Login")" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar Session</span></a>
                     </div>
                 </div>
@@ -62,8 +62,8 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <div class="container-fluid">
-                            <main role="main" class="pb-3">
+                        <div class="d-flex align-items-center justify-content-center">
+                                <main role="main">
                                 @RenderBody()
                             </main>
                         </div>
@@ -74,7 +74,7 @@
     </div>
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/font-awesome/js/all.js"></script>
     <script src="~/js/notify/notiflix-notify-aio-3.2.5.min.js"></script>
