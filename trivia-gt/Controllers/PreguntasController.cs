@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Text;
 using trivia_gt.DAL;
 using trivia_gt.Models;
@@ -53,7 +52,8 @@ namespace trivia_gt.Controllers
             if (respuesta.is_correct == 1)
             {
                 esCorrecta = true;
-            } else
+            }
+            else
             {
                 return Json(new { success = esCorrecta, message = MensajeError("Respuesta incorrecta!!!"), direccion = string.Empty }, new Newtonsoft.Json.JsonSerializerSettings());
             }
