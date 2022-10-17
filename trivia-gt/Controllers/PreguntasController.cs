@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Text;
+using trivia_gt.DAL;
 using trivia_gt.Models;
 
 namespace trivia_gt.Controllers
@@ -14,6 +15,7 @@ namespace trivia_gt.Controllers
             ViewBag.Imagen = @"http://drive.google.com/uc?export=view&id=" + HttpContext.Session.GetString("Imagen");
             ViewBag.ImagenLibro = @"http://drive.google.com/uc?export=view&id=1JC2aNjxTR3he5mywYJY_lnCwG0duZUpp";
             ViewBag.ImagenAnimo = @"http://drive.google.com/uc?export=view&id=1nocxQPDztHwLvbbacQcPUhmC2OmbTegL";
+            ViewBag.Fecha = DateTime.Now.ToString("dd/MM/yyyy");
 
             List<PreguntaBE>? lista = Utilities.ObtienePreguntasCache<List<PreguntaBE>>(HttpContext.Session);
 
@@ -62,8 +64,16 @@ namespace trivia_gt.Controllers
 
             pregunta.idRespuesta = entidad.idRespuesta;
             pregunta.respondio = true;
+            pregunta.idUsuario = (int)HttpContext.Session.GetInt32("IdUsuario");
+            pregunta.punteo = 5;
+            pregunta.intentos = 1;
+            pregunta.idEstado = 1;
 
             lista.Insert(indexList, pregunta);
+
+            PreguntaDAL preguntaDAL = new PreguntaDAL();
+
+            _ = preguntaDAL.Crear(pregunta);
 
             Utilities.GrabaPreguntasCache(HttpContext.Session, lista);
 

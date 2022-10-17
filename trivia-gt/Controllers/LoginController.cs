@@ -39,7 +39,7 @@ namespace trivia_gt.Controllers
                 return Json(new { success = false, message = "<p class='h5'>La clave ingresada es incorrecta</p>" }, new Newtonsoft.Json.JsonSerializerSettings());
             }
 
-
+            HttpContext.Session.SetInt32("IdUsuario", listaUsuario[0].IdUsuario);
             HttpContext.Session.SetString("Nombres", listaUsuario[0].Nombres + " " + listaUsuario[0].Apellidos);
             HttpContext.Session.SetString("Correo", entidad.Correo);
             HttpContext.Session.SetString("Imagen", listaUsuario[0].url);

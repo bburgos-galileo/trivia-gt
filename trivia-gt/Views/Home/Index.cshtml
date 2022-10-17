@@ -2,6 +2,7 @@
     ViewData["Title"] = "Menu";
     string imageLibro = ViewBag.ImagenLibro;
     string imageAnimo = ViewBag.ImagenAnimo;
+    string fecha = ViewBag.Fecha;
 }
 
 <div class="text-center">
@@ -14,7 +15,7 @@
                 <img src="@imageAnimo" class="w-50 h-auto rounded">
             </div>
             <div class="card-body">
-                <h5 class="card-title">Ultima conexión</h5>
+                <h5 class="card-title">Ultima conexión @fecha</h5>
             </div>
         </div>
         <div class="card float-end">
