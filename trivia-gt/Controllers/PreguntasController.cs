@@ -151,7 +151,7 @@ namespace trivia_gt.Controllers
             StringBuilder html = new(string.Empty);
 
             html.Append("<div class='card align-content-center text-center' style='background-color:#32C682'>");
-            html.Append(" <img class='w-25 h-auto rounded card-img-top mx-auto d-block' src='http://drive.google.com/uc?export=view&id=1nocxQPDztHwLvbbacQcPUhmC2OmbTegL'>");
+            html.Append(" <img class='w-25 h-auto rounded card-img-top mx-auto d-block' src='https://drive.google.com/uc?export=view&id=1nocxQPDztHwLvbbacQcPUhmC2OmbTegL'>");
             html.Append("<div class='card-body'>");
             html.Append("<p class='card-text text-white font-weight-bold fs-5'>Respuesta correcta!!! clic para continuar</p>");
             html.Append("</div></div>");
@@ -164,7 +164,7 @@ namespace trivia_gt.Controllers
             StringBuilder html = new(string.Empty);
 
             html.Append("<div class='card align-content-center text-center' style='background-color:#FA5549'>");
-            html.Append(" <img class='w-25 h-auto rounded card-img-top mx-auto d-block' src='http://drive.google.com/uc?export=view&id=1wQ3L1xIfvyfoUueYKik5GTNTM1tYU89w'>");
+            html.Append(" <img class='w-25 h-auto rounded card-img-top mx-auto d-block' src='https://drive.google.com/uc?export=view&id=1wQ3L1xIfvyfoUueYKik5GTNTM1tYU89w'>");
             html.Append("<div class='card-body'>");
             html.Append("<p class='card-text text-white font-weight-bold fs-5'>" + mensaje + "</p>");
             html.Append("</div></div>");
