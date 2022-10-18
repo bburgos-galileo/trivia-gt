@@ -141,11 +141,11 @@ namespace trivia_gt.DAL
             }
         }
 
-        public IList<PreguntaBE> Listar(PreguntaBE entidad)
+        public List<PreguntaBE> Listar(PreguntaBE entidad)
         {
             try
             {
-                IList<PreguntaBE> _lista = new List<PreguntaBE>();
+                List<PreguntaBE> _lista = new List<PreguntaBE>();
                 PreguntaBE _be;
 
                 DataTable _dt = new DataTable();
@@ -232,11 +232,11 @@ namespace trivia_gt.DAL
                 CrearParametro("idPunteo", entidad.idPunteo);
                 AgregarParametro(_idPunteo);
 
-                CrearParametro("punteo", entidad.punteo);
-                AgregarParametro(_punteo);
-
                 CrearParametro("intentos", entidad.intentos);
                 AgregarParametro(_intentos);
+
+                CrearParametro("punteo", entidad.punteo);
+                AgregarParametro(_punteo);
 
                 CrearParametro("idEstado", entidad.idEstado);
                 AgregarParametro(_idEstado);

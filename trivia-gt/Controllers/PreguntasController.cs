@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using trivia_gt.DAL;
 using trivia_gt.Models;
@@ -15,17 +16,43 @@ namespace trivia_gt.Controllers
             ViewBag.ImagenLibro = @"http://drive.google.com/uc?export=view&id=1JC2aNjxTR3he5mywYJY_lnCwG0duZUpp";
             ViewBag.ImagenAnimo = @"http://drive.google.com/uc?export=view&id=1nocxQPDztHwLvbbacQcPUhmC2OmbTegL";
             ViewBag.Fecha = DateTime.Now.ToString("dd/MM/yyyy");
+            ViewBag.Visible = true;
 
             List<PreguntaBE>? lista = Utilities.ObtienePreguntasCache<List<PreguntaBE>>(HttpContext.Session);
 
             if (lista == null)
             {
-                lista = Utilities.ListarPreguntas();
+                int idUsuario = (int)HttpContext.Session.GetInt32("IdUsuario");
+
+                lista = Utilities.ListarPreguntas(idUsuario);
 
                 Utilities.GrabaPreguntasCache(HttpContext.Session, lista);
             }
 
+            bool existe = lista.Exists(p => !p.respondio);
+            
+            if (!existe)
+            {
+                HttpContext.Session.SetString("mensaje", "Niveles Completados");
+                return Redirect("/Home/Index");
+            }
+
             PreguntaBE pregunta = lista.First(p => !p.respondio);
+
+            ViewBag.Nivel = pregunta.nivel;
+
+            //calcula el porcentaje
+
+            existe = lista.Exists(p => p.respondio && p.nivel.Equals(pregunta.nivel));
+
+            if (!existe)
+            {
+                ViewBag.Percentage = 0;
+            } else
+            {
+                int contador = (lista.Where(p => p.respondio && p.nivel.Equals(pregunta.nivel)).ToList().Count * 100) / 5;
+                ViewBag.Percentage = contador;
+            }
 
             return View(pregunta);
         }
@@ -35,6 +62,8 @@ namespace trivia_gt.Controllers
 
         public ActionResult Grabar(PreguntaBE entidad)
         {
+            PreguntaDAL preguntaDAL = new PreguntaDAL();
+
             bool esCorrecta = false;
 
             if (entidad.idRespuesta == 0)
@@ -44,6 +73,7 @@ namespace trivia_gt.Controllers
 
             List<PreguntaBE>? lista = Utilities.ObtienePreguntasCache<List<PreguntaBE>>(HttpContext.Session);
 
+            //optiene la pregunta
             PreguntaBE? pregunta = lista.First(p => p.idPregunta.Equals(entidad.idPregunta));
 
             //valida respuesta
@@ -55,7 +85,37 @@ namespace trivia_gt.Controllers
             }
             else
             {
-                return Json(new { success = esCorrecta, message = MensajeError("Respuesta incorrecta!!!"), direccion = string.Empty }, new Newtonsoft.Json.JsonSerializerSettings());
+                HttpContext.Session.Remove("preguntas");
+
+                string actualiza;
+
+                if (pregunta.idPunteo.Equals(0))
+                {
+                    //agrega la pregunta que se respondio de forma incorrecta;
+
+                    int idUsuario = (int)HttpContext.Session.GetInt32("IdUsuario");
+
+                    pregunta = new PreguntaBE();
+
+                    pregunta.punteo = 0;
+                    pregunta.intentos = 1;
+                    pregunta.nivel = entidad.idPregunta <= 5 ? 1 : 2;
+                    pregunta.idUsuario = idUsuario;
+                    pregunta.idPregunta = entidad.idPregunta;
+                    pregunta.idEstado = 2;
+
+                    _ = preguntaDAL.Crear(pregunta);
+
+                } else
+                {
+                    pregunta.intentos++;
+                    pregunta.punteo = 0;
+                    pregunta.idEstado = 2;
+
+                    _ = preguntaDAL.Actualizar(pregunta);
+                }
+                
+                return Json(new { success = esCorrecta, message = MensajeError("Respuesta incorrecta!!! Clic para continual"), direccion = "/Preguntas/Index" }, new Newtonsoft.Json.JsonSerializerSettings());
             }
 
             int indexList = lista.IndexOf(pregunta);
@@ -66,15 +126,20 @@ namespace trivia_gt.Controllers
             pregunta.respondio = true;
             pregunta.idUsuario = (int)HttpContext.Session.GetInt32("IdUsuario");
             pregunta.punteo = 5;
-            pregunta.intentos = 1;
+            pregunta.intentos++;
             pregunta.idEstado = 1;
 
             lista.Insert(indexList, pregunta);
 
-            PreguntaDAL preguntaDAL = new PreguntaDAL();
-
-            _ = preguntaDAL.Crear(pregunta);
-
+            if (pregunta.idPunteo.Equals(0))
+            {
+                _ = preguntaDAL.Crear(pregunta);
+            }
+            else
+            {
+                _ = preguntaDAL.Actualizar(pregunta);
+            }
+            
             Utilities.GrabaPreguntasCache(HttpContext.Session, lista);
 
             return Json(new { success = esCorrecta, message = Mensaje(), direccion = "/Preguntas/Index" }, new Newtonsoft.Json.JsonSerializerSettings());

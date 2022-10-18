@@ -27,7 +27,7 @@ namespace trivia_gt.Controllers
                 return Json(new { success = false, message = "<p class='h5'>La contraseña es un dato requerido</p>" }, new Newtonsoft.Json.JsonSerializerSettings());
             }
 
-            IList<UsuarioBE> listaUsuario = usuarioDAL.Listar(entidad);
+            List<UsuarioBE> listaUsuario = usuarioDAL.Listar(entidad);
 
             if (listaUsuario.Count == 0)
             {
@@ -52,7 +52,7 @@ namespace trivia_gt.Controllers
         {
             HttpContext.Session.Clear();
 
-            return Redirect("/Login/Login"); ;
+            return Redirect("/Login/Login");
         }
 
         private string Mensaje(ModelStateDictionary modelState)

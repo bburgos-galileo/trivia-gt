@@ -36,7 +36,7 @@ namespace trivia_gt.DAL
         /// obtenidos con la función EjecutarComando
         /// </summary>
         /// <returns></returns>
-        IList<T> Listar(T entidad);
+        List<T> Listar(T entidad);
 
         /// <summary>
         /// Esta función devuelve un dataset con los datos obtenidos con la función EjecutarComando

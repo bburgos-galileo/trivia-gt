@@ -1,6 +1,10 @@
 ﻿@{
     string nombres = ViewBag.Nombres;
     string image = ViewBag.Imagen;
+    bool mostrar = ViewBag.Visible;
+    int nivel = ViewBag.Nivel;
+    int porcentaje = ViewBag.Percentage;
+    string mensaje = ViewBag.mensaje;
 }
 
 <!DOCTYPE html>
@@ -46,15 +50,24 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
+                            @if (ViewBag.Visible)
+                            {
+                                <span class="navbar-text font-weight-bold" style="font-size:large!important">
+                                    Nivel <span class="badge bg-success" style="font-size:large!important">@nivel</span>
+                                </span>
 
-                        <span class="navbar-text font-weight-bold" style="font-size:large!important">
-                            Nivel <span class="badge bg-success" style="font-size:large!important">9</span>
-                        </span>
+                                <div class="progress" style="width: 25em; height: 20px;">
+                                    <!-- 25em = half the screen width -->
+                                    <div class="progress-bar" style="width:@porcentaje%">@porcentaje%</div>
+                                </div>
+                            }
 
-                        <div class="progress" style="width: 25em; height: 20px;">
-                            <!-- 25em = half the screen width -->
-                            <div class="progress-bar" style="width:70%">70%</div>
-                        </div>
+                            @if (ViewBag.mensaje != null)
+                            {
+                                <span class="navbar-text font-weight-bold" style="font-size:large!important">
+                                    @mensaje
+                                </span>
+                            }
 
                     </div>
 

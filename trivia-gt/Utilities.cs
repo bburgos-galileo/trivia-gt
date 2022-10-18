@@ -3,56 +3,95 @@ using System.Text.RegularExpressions;
 using System.Text;
 using trivia_gt.Models;
 using System.Collections.Generic;
+using trivia_gt.DAL;
 
 namespace trivia_gt
 {
     public static class Utilities
     {
-        public static List<PreguntaBE> ListarPreguntas()
+        public static List<PreguntaBE> ListarPreguntas(int idUsuario)
         {
             try
             {
+                PreguntaBE pregunta;
                 RespuestaBE respuestaBE;
+                PreguntaDAL preguntaDAL = new PreguntaDAL();
                 List<PreguntaBE> lista = new List<PreguntaBE>();
 
-                for (int i = 1; i < 10; i++)
+                pregunta = new PreguntaBE
+                {
+                    idUsuario = idUsuario
+                };
+
+                List<PreguntaBE> listaBD = preguntaDAL.Listar(pregunta);
+
+                for (int i = 1; i <= 10; i++)
                 {
                     PreguntaJsonBE preguntaJson = ObtenerPregunta(i.ToString());
 
-                    PreguntaBE pregunta = new PreguntaBE();
+                    bool existe = listaBD.Exists(p => p.idPregunta.Equals(i));
 
-                    pregunta.idPregunta = i;
-                    
-                    if (i < 5)
+                    if (!existe)
                     {
-                        pregunta.nivel = 1;
+                        pregunta = new PreguntaBE
+                        {
+                            idPregunta = i,
+                            nivel = i <= 5 ? 1 : 2,
+                            pregunta = preguntaJson.pregunta,
+                            respuestas = new List<RespuestaBE>()
+                        };
+
+                        respuestaBE = new RespuestaBE();
+                        respuestaBE = preguntaJson.respuesta_1[0];
+                        respuestaBE.idRespuesta = 1;
+                        pregunta.respuestas.Add(respuestaBE);
+
+                        respuestaBE = new RespuestaBE();
+                        respuestaBE = preguntaJson.respuesta_2[0];
+                        respuestaBE.idRespuesta = 2;
+                        pregunta.respuestas.Add(respuestaBE);
+
+                        respuestaBE = new RespuestaBE();
+                        respuestaBE = preguntaJson.respuesta_3[0];
+                        respuestaBE.idRespuesta = 3;
+                        pregunta.respuestas.Add(respuestaBE);
+
                     } else
                     {
-                        pregunta.nivel = 2;
+                        pregunta = new PreguntaBE();
+                        pregunta = listaBD.First(p => p.idPregunta.Equals(i));
+
+                        if (pregunta.idEstado.Equals(1))
+                        {
+                            pregunta.respondio = true;
+                        }
+                        else
+                        {
+                            pregunta.pregunta = preguntaJson.pregunta;
+                            pregunta.nivel = i <= 5 ? 1 : 2;
+
+                            pregunta.respuestas = new List<RespuestaBE>();
+
+                            respuestaBE = new RespuestaBE();
+                            respuestaBE = preguntaJson.respuesta_1[0];
+                            respuestaBE.idRespuesta = 1;
+                            pregunta.respuestas.Add(respuestaBE);
+
+                            respuestaBE = new RespuestaBE();
+                            respuestaBE = preguntaJson.respuesta_2[0];
+                            respuestaBE.idRespuesta = 2;
+                            pregunta.respuestas.Add(respuestaBE);
+
+                            respuestaBE = new RespuestaBE();
+                            respuestaBE = preguntaJson.respuesta_3[0];
+                            respuestaBE.idRespuesta = 3;
+                            pregunta.respuestas.Add(respuestaBE);
+                        }
+
                     }
-
-                    pregunta.pregunta = preguntaJson.pregunta;
-
-                    pregunta.respuestas = new List<RespuestaBE>();
-
-                    respuestaBE = new RespuestaBE();
-                    respuestaBE = preguntaJson.respuesta_1[0];
-                    respuestaBE.idRespuesta = 1;
-                    pregunta.respuestas.Add(respuestaBE);
-
-                    respuestaBE = new RespuestaBE();
-                    respuestaBE = preguntaJson.respuesta_2[0];
-                    respuestaBE.idRespuesta = 2;
-                    pregunta.respuestas.Add(respuestaBE);
-
-                    respuestaBE = new RespuestaBE();
-                    respuestaBE = preguntaJson.respuesta_3[0];
-                    respuestaBE.idRespuesta = 3;
-                    pregunta.respuestas.Add(respuestaBE);
 
 
                     lista.Add(pregunta);
-
 
                 }
 
@@ -104,7 +143,8 @@ namespace trivia_gt
 
         public static T? ObtienePreguntasCache<T>(this ISession session)
         {
-            var value = session.GetString("preguntas");
+            string? value = session.GetString("preguntas");
+
             return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
         }
     }

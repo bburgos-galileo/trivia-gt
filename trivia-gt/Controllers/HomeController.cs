@@ -20,6 +20,17 @@ namespace trivia_gt.Controllers
             ViewBag.ImagenLibro = @"http://drive.google.com/uc?export=view&id=1JC2aNjxTR3he5mywYJY_lnCwG0duZUpp";
             ViewBag.ImagenAnimo = @"http://drive.google.com/uc?export=view&id=1nocxQPDztHwLvbbacQcPUhmC2OmbTegL";
             ViewBag.Fecha = DateTime.Now.ToString("dd/MM/yyyy");
+            ViewBag.Visible = false;
+            ViewBag.Nivel = 0;
+            ViewBag.Percentage = 0;
+
+            if (HttpContext.Session.GetString("mensaje") == null)
+            {
+                ViewBag.Mensaje = null;
+            } else
+            {
+                ViewBag.Mensaje = HttpContext.Session.GetString("mensaje");
+            }
 
             return View();
         }

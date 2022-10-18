@@ -82,11 +82,11 @@ namespace trivia_gt.DAL
             }
         }
 
-        public IList<UsuarioBE> Listar(UsuarioBE entidad)
+        public List<UsuarioBE> Listar(UsuarioBE entidad)
         {
             try
             {
-                IList<UsuarioBE> _lista = new List<UsuarioBE>();
+                List<UsuarioBE> _lista = new List<UsuarioBE>();
                 UsuarioBE _be;
 
                 DataTable _dt = new DataTable();
