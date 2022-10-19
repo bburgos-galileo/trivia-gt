@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FvpLNeaiEKCrHL7LB38PuGeMXkbzTXhcIPu6/6xl+SA=",
+  "Hash": "NBIAlb3ZLoeJA6j1/s6vUv70EhmRMoS+on8It/gtNsI=",
   "Source": "trivia-gt",
   "BasePath": "_content/trivia-gt",
   "Mode": "Default",
@@ -151,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\bandera_guatemala.png"
+    },
+    {
+      "Identity": "C:\\ProyectosU\\Practica del Desarrollo de Software\\trivia-gt\\trivia-gt\\wwwroot\\images\\gt_simbolos.jpg",
+      "SourceId": "trivia-gt",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\ProyectosU\\Practica del Desarrollo de Software\\trivia-gt\\trivia-gt\\wwwroot\\",
+      "BasePath": "_content/trivia-gt",
+      "RelativePath": "images/gt_simbolos.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\gt_simbolos.jpg"
     },
     {
       "Identity": "C:\\ProyectosU\\Practica del Desarrollo de Software\\trivia-gt\\trivia-gt\\wwwroot\\images\\guate.ico",
