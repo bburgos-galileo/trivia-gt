@@ -180,7 +180,6 @@ namespace trivia_gt
 
             preguntaJson = respuestaArray[index];
 
-
             return preguntaJson;
         }
     }
