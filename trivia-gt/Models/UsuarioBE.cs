@@ -27,22 +27,7 @@ namespace trivia_gt.Models
         [DataType(DataType.EmailAddress)]
         public string? Correo { get; set; }
 
-        [DisplayName("Contraseña")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El password es un dato requerido")]
-        [StringLength(100, ErrorMessage = "La clave debe contener de 5 a 100 caracteres", MinimumLength = 5)]
-        [DataType(DataType.Password)]
-
-
-        [DisplayName("idAvatar")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El password es un dato requerido")]
-        [StringLength(100, ErrorMessage = "La clave debe contener de 5 a 100 caracteres", MinimumLength = 5)]
-        
-        public int? IdAvatar { get; set; }
-
-        [DisplayName("idRol")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El password es un dato requerido")]
-        [StringLength(100, ErrorMessage = "La clave debe contener de 5 a 100 caracteres", MinimumLength = 5)]
-        [DataType(DataType.Password)]
+       
 
         public string? Clave { get; set; }
 
