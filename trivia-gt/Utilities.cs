@@ -25,7 +25,6 @@ namespace trivia_gt
                     idUsuario = idUsuario
                 };
 
-                
                 List<PreguntaBE> listaBD = preguntaDAL.Listar(pregunta);
 
                 for (int i = 1; i <= 10; i++)
