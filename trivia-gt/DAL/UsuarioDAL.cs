@@ -50,7 +50,9 @@ namespace trivia_gt.DAL
             try
             {
                 string sql = "select u.idUsuario, u.nombres, u.apellidos, u.fechaNacimiento, u.correoElectronico, " +
-                             "u.contraseña, a.url from usuarios u inner join avatar a on u.idAvatar = a.idAvatar " +
+                             "u.contraseña, a.url, ifnull(u.ultimaConexion, now()) ultimaConexion, " +
+                             "datediff(now(),ifnull(u.ultimaConexion, now())) diasUltimaConn" +
+                             " from usuarios u inner join avatar a on u.idAvatar = a.idAvatar " +
                              "where u.correoElectronico = @Correo";
 
                 using (MySqlConnection connection = _conexionSQL)
