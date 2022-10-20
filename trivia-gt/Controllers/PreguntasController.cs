@@ -24,7 +24,7 @@ namespace trivia_gt.Controllers
             {
                 int idUsuario = (int)HttpContext.Session.GetInt32("IdUsuario");
 
-                lista = Utilities.ListarPreguntas(idUsuario);
+                lista = Utilities.ListarPreguntas(HttpContext.Session, idUsuario);
 
                 Utilities.GrabaPreguntasCache(HttpContext.Session, lista);
             }
