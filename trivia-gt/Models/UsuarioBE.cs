@@ -27,7 +27,13 @@ namespace trivia_gt.Models
         [DataType(DataType.EmailAddress)]
         public string? Correo { get; set; }
 
-       
+        [DisplayName("Avatar")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El avatar es un dato requerido")]
+        public int? IdAvatar { get; set; }
+
+        [DisplayName("Rol")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El Rol es un dato requerido")]
+        public int? IdRol { get; set; }
 
         public string? Clave { get; set; }
 

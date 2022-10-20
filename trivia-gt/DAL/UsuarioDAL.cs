@@ -147,8 +147,6 @@ namespace trivia_gt.DAL
             }
         }
 
-
-
         public int Crear(UsuarioBE entidad)
         {
             throw new NotImplementedException();
