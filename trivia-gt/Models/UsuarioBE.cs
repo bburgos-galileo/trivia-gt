@@ -13,11 +13,11 @@ namespace trivia_gt.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El nombre de usuario es un dato requerido")]
         public string? Nombres { get; set; }
 
-        [DisplayName("Nombre")]
+        [DisplayName("Apellidos")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El apellido del usuario es un dato requerido")]
         public string? Apellidos { get; set; }
 
-        [DisplayName("Nombre")]
+        [DisplayName("Fecha de nacimiento")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "La fecha de nacimiento del usuario es un dato requerido")]
         [DataType(DataType.DateTime)]
         public string? FechaNacimiento { get; set; }
@@ -31,6 +31,20 @@ namespace trivia_gt.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El password es un dato requerido")]
         [StringLength(100, ErrorMessage = "La clave debe contener de 5 a 100 caracteres", MinimumLength = 5)]
         [DataType(DataType.Password)]
+
+
+        [DisplayName("idAvatar")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El password es un dato requerido")]
+        [StringLength(100, ErrorMessage = "La clave debe contener de 5 a 100 caracteres", MinimumLength = 5)]
+        
+        public int? IdAvatar { get; set; }
+
+        [DisplayName("idRol")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El password es un dato requerido")]
+        [StringLength(100, ErrorMessage = "La clave debe contener de 5 a 100 caracteres", MinimumLength = 5)]
+        [DataType(DataType.Password)]
+
+
         public string? Clave { get; set; }
 
         [HiddenInput(DisplayValue = false)]
