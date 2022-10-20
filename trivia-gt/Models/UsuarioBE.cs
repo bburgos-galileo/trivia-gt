@@ -44,7 +44,6 @@ namespace trivia_gt.Models
         [StringLength(100, ErrorMessage = "La clave debe contener de 5 a 100 caracteres", MinimumLength = 5)]
         [DataType(DataType.Password)]
 
-
         public string? Clave { get; set; }
 
         [HiddenInput(DisplayValue = false)]
