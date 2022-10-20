@@ -43,6 +43,10 @@ namespace trivia_gt.Controllers
             HttpContext.Session.SetString("Nombres", listaUsuario[0].Nombres + " " + listaUsuario[0].Apellidos);
             HttpContext.Session.SetString("Correo", entidad.Correo);
             HttpContext.Session.SetString("Imagen", listaUsuario[0].url);
+            HttpContext.Session.SetString("FechaConexion", listaUsuario[0].fechaUltimaConexion);
+            HttpContext.Session.SetInt32("DiasConexion", int.Parse(listaUsuario[0].diasUltimaConexion));
+
+            usuarioDAL.Actualizar(entidad);
 
             return Json(new { success = true, direccion = "/Home/Index" }, new Newtonsoft.Json.JsonSerializerSettings());
         }

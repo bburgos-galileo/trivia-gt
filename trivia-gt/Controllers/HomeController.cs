@@ -17,9 +17,21 @@ namespace trivia_gt.Controllers
         {
             ViewBag.Nombres = HttpContext.Session.GetString("Nombres");
             ViewBag.Imagen = @"https://drive.google.com/uc?export=view&id=" + HttpContext.Session.GetString("Imagen");
+
+            Int32 dias = (int)HttpContext.Session.GetInt32("DiasConexion");
+
+            if (dias > 1)
+            {
+                ViewBag.ImagenAnimo = @"https://drive.google.com/uc?export=view&id=1wQ3L1xIfvyfoUueYKik5GTNTM1tYU89w";
+            } else
+            {
+                ViewBag.ImagenAnimo = @"https://drive.google.com/uc?export=view&id=1nocxQPDztHwLvbbacQcPUhmC2OmbTegL";
+            }
+
             ViewBag.ImagenLibro = @"https://drive.google.com/uc?export=view&id=1JC2aNjxTR3he5mywYJY_lnCwG0duZUpp";
-            ViewBag.ImagenAnimo = @"https://drive.google.com/uc?export=view&id=1nocxQPDztHwLvbbacQcPUhmC2OmbTegL";
-            ViewBag.Fecha = DateTime.Now.ToString("dd/MM/yyyy");
+            
+            ViewBag.Fecha = HttpContext.Session.GetString("FechaConexion");
+
             ViewBag.Visible = false;
             ViewBag.Nivel = 0;
             ViewBag.Percentage = 0;

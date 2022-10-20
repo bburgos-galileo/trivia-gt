@@ -35,6 +35,12 @@ namespace trivia_gt.Models
 
         [HiddenInput(DisplayValue = false)]
         public string?  url { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public string? fechaUltimaConexion { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public string? diasUltimaConexion { get; set; }
     }
 
 }

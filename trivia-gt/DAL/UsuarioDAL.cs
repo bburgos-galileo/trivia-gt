@@ -50,9 +50,9 @@ namespace trivia_gt.DAL
             try
             {
                 string sql = "select u.idUsuario, u.nombres, u.apellidos, u.fechaNacimiento, u.correoElectronico, " +
-                             "u.contraseña, a.url, ifnull(u.ultimaConexion, now()) ultimaConexion, " +
-                             "datediff(now(),ifnull(u.ultimaConexion, now())) diasUltimaConn" +
-                             " from usuarios u inner join avatar a on u.idAvatar = a.idAvatar " +
+                             "u.contraseña, a.url, DATE_FORMAT(ifnull(u.ultimaConexion, now()), '%d/%m/%Y') ultimaConexion, " +
+                             "convert(datediff(now(),ifnull(u.ultimaConexion, now())), char) diasUltimaConn " +
+                             "from usuarios u inner join avatar a on u.idAvatar = a.idAvatar " +
                              "where u.correoElectronico = @Correo";
 
                 using (MySqlConnection connection = _conexionSQL)
@@ -104,7 +104,9 @@ namespace trivia_gt.DAL
                         Apellidos = item["apellidos"].ToString(),
                         Correo = item["correoElectronico"].ToString(),
                         Clave = item["contraseña"].ToString(),
-                        url = item["url"].ToString()
+                        url = item["url"].ToString(),
+                        diasUltimaConexion = item["diasUltimaConn"].ToString(),
+                        fechaUltimaConexion = item["ultimaConexion"].ToString()
                     };
 
                     _lista.Add(_be);
@@ -120,7 +122,29 @@ namespace trivia_gt.DAL
 
         public bool Actualizar(UsuarioBE entidad)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string sql = "update usuarios set ultimaConexion = now() where correoElectronico = @Correo";
+
+                CrearComando(sql, CommandType.Text, _conexionSQL);
+
+                CrearParametro("Correo", entidad.Correo);
+                AgregarParametro(_correo);
+
+                _conexionSQL.Open();
+                _comandoSQL.ExecuteNonQuery();
+                _conexionSQL.Close();
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                if (_conexionSQL.State == ConnectionState.Open)
+                    _conexionSQL.Close();
+
+                throw new Exception(ex.Message);
+            }
         }
 
 
