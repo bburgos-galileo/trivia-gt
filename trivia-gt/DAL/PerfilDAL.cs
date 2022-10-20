@@ -110,7 +110,7 @@ namespace trivia_gt.DAL
         {
             try
             {
-                string sql = "";
+                string sql = "select idUsuario, nombres, apellidos, fechaNacimiento, correoElectronico,contraseña,idAvatar,idRol FROM usuarios WHERE correoElectronico = @Correo";
 
                 using (MySqlConnection connection = _conexionSQL)
                 {
