@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using trivia_gt.DAL;
 using MySqlX.XDevAPI;
 
+
 namespace trivia_gt
 {
     public static class Utilities
