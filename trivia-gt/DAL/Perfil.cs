@@ -3,8 +3,8 @@ using System.Data;
 
 namespace trivia_gt.DAL
 {
-    public class Perfil
-            {
+    public class Perfil 
+    {
 
         MySqlConnection _conexionSQL;
         MySqlCommand _comandoSQL;
