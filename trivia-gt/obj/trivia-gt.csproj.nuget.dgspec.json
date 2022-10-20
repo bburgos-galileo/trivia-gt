@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\donal\\source\\repos\\bburgos-galileo\\trivia-gt\\trivia-gt\\trivia-gt.csproj": {}
+    "C:\\ProyectosU\\Practica del Desarrollo de Software\\trivia-gt\\trivia-gt\\trivia-gt.csproj": {}
   },
   "projects": {
-    "C:\\Users\\donal\\source\\repos\\bburgos-galileo\\trivia-gt\\trivia-gt\\trivia-gt.csproj": {
+    "C:\\ProyectosU\\Practica del Desarrollo de Software\\trivia-gt\\trivia-gt\\trivia-gt.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\donal\\source\\repos\\bburgos-galileo\\trivia-gt\\trivia-gt\\trivia-gt.csproj",
+        "projectUniqueName": "C:\\ProyectosU\\Practica del Desarrollo de Software\\trivia-gt\\trivia-gt\\trivia-gt.csproj",
         "projectName": "trivia-gt",
-        "projectPath": "C:\\Users\\donal\\source\\repos\\bburgos-galileo\\trivia-gt\\trivia-gt\\trivia-gt.csproj",
-        "packagesPath": "C:\\Users\\donal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\donal\\source\\repos\\bburgos-galileo\\trivia-gt\\trivia-gt\\obj\\",
+        "projectPath": "C:\\ProyectosU\\Practica del Desarrollo de Software\\trivia-gt\\trivia-gt\\trivia-gt.csproj",
+        "packagesPath": "C:\\Users\\bburgos\\.nuget\\packages\\",
+        "outputPath": "C:\\ProyectosU\\Practica del Desarrollo de Software\\trivia-gt\\trivia-gt\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\donal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bburgos\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
