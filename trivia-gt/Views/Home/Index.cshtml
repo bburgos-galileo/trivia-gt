@@ -6,25 +6,31 @@
 }
 
 <div class="text-center">
-    
-    
 
     <div class="card-group mt-5">
         <div class="card float-start">
-            <div class="card-img-top">
-                <img src="@imageAnimo" class="w-50 h-auto rounded">
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Ultima conexión @fecha</h5>
-            </div>
+
+            <figure class="figure">
+                <div class="card-img-top">
+                    <img src="@imageAnimo" class="w-25 figure-img img-fluid rounded">
+                </div>
+                <div class="card-body">
+                    <figcaption class="figure-caption text-success" style=" font-size:large!important">Ultima Conexión @fecha</figcaption>
+                </div>
+            </figure>
+
         </div>
         <div class="card float-end">
-            <div class="card-img-top">
-                <img src="@imageLibro" class="w-50 h-auto rounded">
-            </div>
-            <div class="card-body">
-                <h5 class="card-title"><a href="@Url.Action("Index", "Preguntas")">Jugar</a></h5>
-            </div>
+
+            <figure class="figure">
+                <div class="card-img-top">
+                    <img src="@imageLibro" class="w-25 figure-img img-fluid rounded">
+                </div>
+                <div class="card-body">
+                    <figcaption class="figure-caption" style="font-size:large!important"><a href="@Url.Action("Index", "Preguntas")">Jugar</a></figcaption>
+                </div>
+            </figure>
+
         </div>
     </div>
 

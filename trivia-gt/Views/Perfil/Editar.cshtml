@@ -1,83 +1,94 @@
 ﻿@model trivia_gt.Models.UsuarioBE
 
 @{
-    ViewData["Title"] = "Editar";
+    ViewData["Title"] = "Perfil";
+    string image = ViewBag.ImagenCombo;
 }
 
-<h1>Editar</h1>
 
-<h4>UsuarioBE</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Editar">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdUsuario" class="control-label"></label>
-                <input asp-for="IdUsuario" class="form-control" />
-                <span asp-validation-for="IdUsuario" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombres" class="control-label"></label>
-                <input asp-for="Nombres" class="form-control" />
-                <span asp-validation-for="Nombres" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Apellidos" class="control-label"></label>
-                <input asp-for="Apellidos" class="form-control" />
-                <span asp-validation-for="Apellidos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaNacimiento" class="control-label"></label>
-                <input asp-for="FechaNacimiento" class="form-control" />
-                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Correo" class="control-label"></label>
-                <input asp-for="Correo" class="form-control" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdAvatar" class="control-label"></label>
-                <input asp-for="IdAvatar" class="form-control" />
-                <span asp-validation-for="IdAvatar" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdRol" class="control-label"></label>
-                <input asp-for="IdRol" class="form-control" />
-                <span asp-validation-for="IdRol" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Clave" class="control-label"></label>
-                <input asp-for="Clave" class="form-control" />
-                <span asp-validation-for="Clave" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="url" class="control-label"></label>
-                <input asp-for="url" class="form-control" />
-                <span asp-validation-for="url" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="fechaUltimaConexion" class="control-label"></label>
-                <input asp-for="fechaUltimaConexion" class="form-control" />
-                <span asp-validation-for="fechaUltimaConexion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="diasUltimaConexion" class="control-label"></label>
-                <input asp-for="diasUltimaConexion" class="form-control" />
-                <span asp-validation-for="diasUltimaConexion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="row m-2">
+    <div class="col-md-10">
+        <div class="card border-success overflow-auto">
+
+            @using (Html.BeginForm("Editar", "Perfil", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmEditarPerfil", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="card-body">
+                    <div class="row g-3">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        @Html.HiddenFor(model => model.IdUsuario, new { @id = "hdIdUsuario" })
+
+
+                        <div class="col-md-4">
+                            <label asp-for="Nombres" data- class="form-label"></label>
+                            <input asp-for="Nombres" class="form-control" />
+                            <span asp-validation-for="Nombres" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Apellidos" class="form-label"></label>
+                            <input asp-for="Apellidos" class="form-control" />
+                            <span asp-validation-for="Apellidos" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="FechaNacimiento" class="form-label"></label>
+                            <input asp-for="FechaNacimiento" class="form-control" />
+                            <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Correo" class="form-label"></label>
+                            <input asp-for="Correo" class="form-control" />
+                            <span asp-validation-for="Correo" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label asp-for="IdRol" class="form-label"></label>
+                            @Html.DropDownListFor(model => model.IdRol, Model.Roles, new { @class = "form-select"})
+                            <span asp-validation-for="IdRol" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.IdAvatar, htmlAttributes: new { @class = "form-label" })
+                            <select asp-for="IdAvatar" class="form-select" id="avatar" name="avatar" is="ms-dropdown">
+                                @foreach (var item in Model.ListaAvatar)
+                                {
+                                    <option value="@item.IdAvatar" data-image="@item.URL">@item.Tag</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label asp-for="Clave" class="form-label"></label>
+                            <input asp-for="Clave" class="form-control" value="@Model.Clave"/>
+                            <span asp-validation-for="Clave" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label asp-for="ConfirmacionClave" class="form-label"></label>
+                            <input asp-for="ConfirmacionClave" class="form-control" value="@Model.Clave" />
+                            <span asp-validation-for="ConfirmacionClave" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light mt-2">
+                    <div class="text-end">
+                        <input id="btnGrabar" type="submit" value="Grabar" class="btn btn-lg btn-group-lg btn-outline-primary" />
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-lg btn-group-lg btn-outline-success ms-2">Cerrar</a>
+                    </div>
+                </div>
+
+            }
+
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

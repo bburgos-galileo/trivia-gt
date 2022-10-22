@@ -4,7 +4,7 @@ using trivia_gt.Models;
 
 namespace trivia_gt.DAL
 {
-    public class PerfilDAL 
+    public class PerfilDAL :IDALBase<UsuarioBE>
     {
 
         MySqlConnection _conexionSQL;
@@ -161,7 +161,8 @@ namespace trivia_gt.DAL
                         Apellidos = item["apellidos"].ToString(),
                         Correo = item["correoElectronico"].ToString(),
                         Clave = item["contraseña"].ToString(),
-                        url = item["url"].ToString()
+                        IdAvatar = (int)item["idAvatar"],
+                        IdRol = (int)item["idRol"]
                     };
 
                     _lista.Add(_be);

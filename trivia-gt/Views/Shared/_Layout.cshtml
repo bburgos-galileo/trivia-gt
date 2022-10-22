@@ -17,38 +17,39 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/notify/notiflix-3.2.5.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css"/>
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/dd.css" asp-append-version="true" />
 </head>
 <body style="background-image:url(/images/gt_simbolos.jpg)">
 
     <div class="jumbotron-fluid">
         <div class="container-fluid ">
-        <div class="row flex-nowrap">
-            <div class="col-auto px-0">
-                <div id="sidebar" class="collapse collapse-horizontal show border-end">
-                    <div class="sidebar-heading border-bottom bg-warning">
-                        <div class="card align-content-center text-center bg-warning">
-                            <img class="w-50 h-auto rounded card-img-top mx-auto d-block" src="@image">
-                            <div class="card-body">
-                                <p class="card-text text-success font-weight-bold">@nombres</p>
+            <div class="row flex-nowrap">
+                <div class="col-auto px-0">
+                    <div id="sidebar" class="collapse collapse-horizontal show border-end">
+                        <div class="sidebar-heading border-bottom bg-warning">
+                            <div class="card align-content-center text-center bg-warning">
+                                <img class="w-50 h-auto rounded card-img-top mx-auto d-block" src="@image">
+                                <div class="card-body">
+                                    <p class="card-text text-success font-weight-bold">@nombres</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                         <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start bg-warning min-vh-100">
-                        <a href="@Url.Action("Editar","Perfil")" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-user"></i> <span>Mi Perfil</span> </a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-users"></i> <span>Mis Amigos</span></a>
-                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-gears"></i> <span>Configuración</span></a>
-                        <a href="@Url.Action("Logout", "Login")" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar Session</span></a>
+                            <a href="@Url.Action("Editar","Perfil")" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-user"></i> <span>Mi Perfil</span> </a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-users"></i> <span>Mis Amigos</span></a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-gears"></i> <span>Configuración</span></a>
+                            <a href="@Url.Action("Logout", "Login")" class="list-group-item list-group-item-action list-group-item-primary p-3 border-end-0 d-inline-block text-truncate config" data-bs-parent="#sidebar"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar Session</span></a>
+                        </div>
                     </div>
                 </div>
-            </div>
                 <div class="col p-0 m-0">
 
-                  <nav class="navbar navbar-expand-lg navbar-light bg-warning border-bottom">
-                    <div class="container-fluid">
-                        <button class="btn btn-primary" id="sidebarToggle" data-bs-target="#sidebar" data-bs-toggle="collapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                    <nav class="navbar navbar-expand-lg navbar-light bg-warning border-bottom">
+                        <div class="container-fluid">
+                            <button class="btn btn-primary" id="sidebarToggle" data-bs-target="#sidebar" data-bs-toggle="collapse">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
 
                             @if (ViewBag.Visible)
                             {
@@ -69,22 +70,25 @@
                                 </span>
                             }
 
-                    </div>
+                        </div>
 
-                </nav>
+                    </nav>
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="d-flex align-items-center justify-content-center">
-                                <main role="main">
-                                @RenderBody()
-                            </main>
+                    <div class="container-fluid">
+                        <div class="row d-flex">
+                            <div class="col-12">
+                                <div class="align-items-center justify-content-center">
+                                    <main role="main">
+                                        @RenderBody()
+                                    </main>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <script src="/lib/jquery/dist/jquery.min.js"></script>
@@ -92,6 +96,7 @@
     <script src="~/lib/font-awesome/js/all.js"></script>
     <script src="~/js/notify/notiflix-notify-aio-3.2.5.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/dd.min.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
