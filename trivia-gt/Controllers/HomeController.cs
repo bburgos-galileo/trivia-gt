@@ -36,6 +36,7 @@ namespace trivia_gt.Controllers
             ViewBag.Nivel = 0;
             ViewBag.Percentage = 0;
 
+
             if (HttpContext.Session.GetString("mensaje") == null)
             {
                 ViewBag.Mensaje = null;

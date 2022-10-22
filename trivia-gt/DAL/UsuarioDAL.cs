@@ -104,6 +104,7 @@ namespace trivia_gt.DAL
                         Apellidos = item["apellidos"].ToString(),
                         Correo = item["correoElectronico"].ToString(),
                         Clave = item["contraseña"].ToString(),
+                        ConfirmacionClave = item["contraseña"].ToString(),
                         url = item["url"].ToString(),
                         diasUltimaConexion = item["diasUltimaConn"].ToString(),
                         fechaUltimaConexion = item["ultimaConexion"].ToString()

@@ -8,6 +8,7 @@ namespace trivia_gt.Controllers
 {
     public class PerfilController : Controller
     {
+        [HttpGet]
         public IActionResult Editar()
         {
             UsuarioBE usuarioBE = new UsuarioBE();
@@ -48,6 +49,21 @@ namespace trivia_gt.Controllers
             ViewBag.ImagenCombo = @"https://drive.google.com/uc?export=view&id=1wQ3L1xIfvyfoUueYKik5GTNTM1tYU89w";
 
             return View(usuarioBE);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(UsuarioBE entidad)
+        {
+            PerfilDAL perfilDAL = new PerfilDAL();
+
+            _ = perfilDAL.Actualizar(entidad);
+
+            HttpContext.Session.Remove("Imagen");
+            HttpContext.Session.SetString("Imagen", entidad.url);
+
+
+            return Redirect("/Home/Index");
+
         }
     }
 }

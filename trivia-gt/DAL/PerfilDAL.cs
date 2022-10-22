@@ -17,6 +17,7 @@ namespace trivia_gt.DAL
         MySqlParameter _correo;
         MySqlParameter _idAvatar;
         MySqlParameter _idRol;
+        MySqlParameter _clave;
 
         public PerfilDAL()
         {
@@ -36,7 +37,7 @@ namespace trivia_gt.DAL
             switch (nombre)
             {
                 case "IdUsuario":
-                    _correo = new MySqlParameter
+                    _idUsuario = new MySqlParameter
                     {
                         ParameterName = "@IdUsuario",
                         MySqlDbType = MySqlDbType.Int32,
@@ -74,7 +75,7 @@ namespace trivia_gt.DAL
                 case "Correo":
                     _correo = new MySqlParameter
                     {
-                        ParameterName = "@Correo",
+                        ParameterName = "@CorreoElectronico",
                         MySqlDbType = MySqlDbType.VarChar,
                         Direction = ParameterDirection.Input,
                         Value = valor
@@ -98,6 +99,15 @@ namespace trivia_gt.DAL
                         Value = valor
                     };
                     break;
+                case "Clave":
+                    _clave = new MySqlParameter
+                    {
+                        ParameterName = "@Clave",
+                        MySqlDbType = MySqlDbType.VarChar,
+                        Direction = ParameterDirection.Input,
+                        Value = valor
+                    };
+                    break;
             }
         }
 
@@ -110,7 +120,7 @@ namespace trivia_gt.DAL
         {
             try
             {
-                string sql = "select idUsuario, nombres, apellidos, fechaNacimiento, correoElectronico,contraseña,idAvatar,idRol FROM usuarios WHERE correoElectronico = @Correo";
+                string sql = "select idUsuario, nombres, apellidos, fechaNacimiento, correoElectronico,contraseña,idAvatar,idRol FROM usuarios WHERE correoElectronico = @CorreoElectronico";
 
                 using (MySqlConnection connection = _conexionSQL)
                 {
@@ -161,6 +171,7 @@ namespace trivia_gt.DAL
                         Apellidos = item["apellidos"].ToString(),
                         Correo = item["correoElectronico"].ToString(),
                         Clave = item["contraseña"].ToString(),
+                        ConfirmacionClave = item["contraseña"].ToString(),
                         IdAvatar = (int)item["idAvatar"],
                         IdRol = (int)item["idRol"]
                     };
@@ -180,12 +191,35 @@ namespace trivia_gt.DAL
         {
             try
             {
-                string sql = "";
+                string sql = "UPDATE usuarios SET nombres = @Nombres, apellidos = @Apellidos, " +
+                             "fechaNacimiento = @FechaNacimiento, correoElectronico = @CorreoElectronico, " +
+                             "contraseña = @Clave, idAvatar = @IdAvatar, idRol = @IdRol WHERE idUsuario= @IdUsuario";
 
                 CrearComando(sql, CommandType.Text, _conexionSQL);
 
+                CrearParametro("IdUsuario", entidad.IdUsuario);
+                AgregarParametro(_idUsuario);
+
+                CrearParametro("Nombres", entidad.Nombres);
+                AgregarParametro(_nombres);
+
+                CrearParametro("Apellidos", entidad.Apellidos);
+                AgregarParametro(_apellidos);
+
+                CrearParametro("FechaNacimiento", entidad.FechaNacimiento);
+                AgregarParametro(_fechaNacimiento);
+
                 CrearParametro("Correo", entidad.Correo);
                 AgregarParametro(_correo);
+
+                CrearParametro("Clave", entidad.Clave);
+                AgregarParametro(_clave);
+
+                CrearParametro("IdAvatar", entidad.IdAvatar);
+                AgregarParametro(_idAvatar);
+
+                CrearParametro("IdRol", entidad.IdRol);
+                AgregarParametro(_idRol);
 
                 _conexionSQL.Open();
                 _comandoSQL.ExecuteNonQuery();
