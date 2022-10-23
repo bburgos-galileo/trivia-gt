@@ -35,14 +35,23 @@ namespace trivia_gt.Controllers
             ViewBag.Visible = false;
             ViewBag.Nivel = 0;
             ViewBag.Percentage = 0;
-
-
+            
             if (HttpContext.Session.GetString("mensaje") == null)
             {
                 ViewBag.Mensaje = null;
             } else
             {
                 ViewBag.Mensaje = HttpContext.Session.GetString("mensaje");
+            }
+
+            if (HttpContext.Session.GetString("informacion") == null)
+            {
+                ViewBag.Info = null;
+            }
+            else
+            {
+                ViewBag.Info = HttpContext.Session.GetString("informacion");
+                HttpContext.Session.Remove("informacion");
             }
 
             return View();

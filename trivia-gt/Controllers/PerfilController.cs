@@ -55,14 +55,41 @@ namespace trivia_gt.Controllers
         public IActionResult Editar(UsuarioBE entidad)
         {
             PerfilDAL perfilDAL = new PerfilDAL();
+            UsuarioBE usuarioBE = new UsuarioBE();
+            UsuarioDAL usuarioDAL = new UsuarioDAL();
+
+            List<UsuarioBE> _lista = new List<UsuarioBE>();
+
+            usuarioBE.Correo = HttpContext.Session.GetString("Correo");
 
             _ = perfilDAL.Actualizar(entidad);
+            _lista = usuarioDAL.Listar(usuarioBE);
 
             HttpContext.Session.Remove("Imagen");
-            HttpContext.Session.SetString("Imagen", entidad.url);
+            HttpContext.Session.SetString("Imagen", _lista[0].url);
+            HttpContext.Session.SetString("informacion", "Registro Actualizado");
+
+ 
 
 
             return Redirect("/Home/Index");
+
+        }
+
+        [HttpGet]
+        public IActionResult Crear()
+        {
+            return View(new UsuarioBE());
+        }
+
+        [HttpPost]
+        public IActionResult Crear(UsuarioBE entidad)
+        {
+            PerfilDAL perfilDAL = new PerfilDAL();
+
+            _ = perfilDAL.Crear(entidad);
+
+            return Redirect("/Login/Login");
 
         }
     }

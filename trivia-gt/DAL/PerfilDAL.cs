@@ -173,7 +173,8 @@ namespace trivia_gt.DAL
                         Clave = item["contraseña"].ToString(),
                         ConfirmacionClave = item["contraseña"].ToString(),
                         IdAvatar = (int)item["idAvatar"],
-                        IdRol = (int)item["idRol"]
+                        IdRol = (int)item["idRol"],
+                        FechaNacimiento = String.Format("{0:yyyy-MM-dd}", item["fechaNacimiento"])
                     };
 
                     _lista.Add(_be);
@@ -244,9 +245,6 @@ namespace trivia_gt.DAL
                 string sql = "";
 
                 CrearComando(sql, CommandType.Text, _conexionSQL);
-
-                CrearParametro("Correo", entidad.Correo);
-                AgregarParametro(_correo);
 
                 _conexionSQL.Open();
                 _comandoSQL.ExecuteNonQuery();

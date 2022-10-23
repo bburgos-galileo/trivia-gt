@@ -23,7 +23,7 @@ namespace trivia_gt.Models
         [DisplayName("Fecha de nacimiento")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "La fecha de nacimiento del usuario es un dato requerido")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, HtmlEncode = false)]
         public string? FechaNacimiento { get; set; }
 
         [DisplayName("Correo")]
