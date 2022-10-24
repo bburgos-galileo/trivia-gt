@@ -92,6 +92,8 @@ namespace trivia_gt.Controllers
             _lista = perfilDAL.Listar(usuarioBE);
             _listaAvatar = avatarDAL.Listar(new AvatarBE());
 
+            usuarioBE.ListaAvatar = new List<AvatarBE>();
+
             foreach (AvatarBE item in _listaAvatar)
             {
 
