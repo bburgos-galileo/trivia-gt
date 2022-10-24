@@ -29,7 +29,7 @@
     <input type=hidden id="iInfo" name="iInfo"
            value="@ViewBag.Info" />
 
-    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-floating", Id = "frmLogin" }))
+    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-floating", Id = "frmLogin", autocomplete = "off" }))
     {
         @Html.AntiForgeryToken()
 

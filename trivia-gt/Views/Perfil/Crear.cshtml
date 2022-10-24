@@ -28,7 +28,7 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-8 mx-auto">
                     <div class="card border-success overflow-auto mt-5">
-                        @using (Html.BeginForm("Crear", "Perfil", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmRegistrar", role = "form", autocomplete="off" }))
+                    @using (Html.BeginForm("Crear", "Perfil", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmRegistrar", role = "form", autocomplete = "off" }))
                         {
                             @Html.AntiForgeryToken()
 
