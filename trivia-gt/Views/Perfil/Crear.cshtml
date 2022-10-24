@@ -17,12 +17,28 @@
     <meta name="theme-color" content="#563d7c">
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/signin.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/notify/notiflix-3.2.5.min.css" asp-append-version="true" />
 
 </head>
-<body>
+<body style="background-color: #666!important; background-image:url(/images/gt_simbolos.jpg)" class="text-center">
+   
+      @using (Html.BeginForm("Crear", "Perfil", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmCrearPerfil", role = "form" }))
+            {
+           
 
-
+                <div class="card-header align-content-center text-center bg-primary d-block">
+                    <div class="col-md-10">
+                        @Html.LabelFor(model => model.IdAvatar, htmlAttributes: new { @class = "form-label font-weight-bold text-light" })
+                        <select asp-for="IdAvatar" class="form-select" id="IdAvatar" name="IdAvatar" is="ms-dropdown">
+                            @foreach (var item in Model.ListaAvatar)
+                            {
+                                <option value="@item.IdAvatar" data-image="@item.URL">@item.Tag</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                }
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

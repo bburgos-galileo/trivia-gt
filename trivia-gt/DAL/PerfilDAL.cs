@@ -246,9 +246,34 @@ namespace trivia_gt.DAL
         {
             try
             {
-                string sql = "";
+                string sql = "INSERT INTO usuarios SET nombres = @Nombres, apellidos = @Apellidos, " +
+                             "fechaNacimiento = @FechaNacimiento, correoElectronico = @CorreoElectronico, " +
+                             "contraseña = @Clave, idAvatar = 11 ";
 
                 CrearComando(sql, CommandType.Text, _conexionSQL);
+
+                CrearParametro("Nombres", entidad.Nombres);
+                AgregarParametro(_nombres);
+
+                CrearParametro("Apellidos", entidad.Apellidos);
+                AgregarParametro(_apellidos);
+
+                CrearParametro("FechaNacimiento", entidad.FechaNacimiento);
+                AgregarParametro(_fechaNacimiento);
+
+
+                CrearParametro("Correo", entidad.Correo);
+                AgregarParametro(_correo);
+
+                if (entidad.Clave != null)
+                {
+                    CrearParametro("Clave", entidad.Clave);
+                    AgregarParametro(_clave);
+                }
+
+
+                CrearParametro("IdRol", entidad.IdRol);
+                AgregarParametro(_idRol);
 
                 _conexionSQL.Open();
                 _comandoSQL.ExecuteNonQuery();
