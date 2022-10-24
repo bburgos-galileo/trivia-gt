@@ -79,6 +79,30 @@ namespace trivia_gt.Controllers
         [HttpGet]
         public IActionResult Crear()
         {
+            UsuarioBE usuarioBE = new UsuarioBE();
+            PerfilDAL perfilDAL = new PerfilDAL();
+            AvatarDAL avatarDAL = new AvatarDAL();
+
+            List<UsuarioBE> _lista = new List<UsuarioBE>();
+            List<AvatarBE> _listaAvatar = new List<AvatarBE>();
+
+            usuarioBE.Correo = HttpContext.Session.GetString("Correo");
+
+
+            _lista = perfilDAL.Listar(usuarioBE);
+            _listaAvatar = avatarDAL.Listar(new AvatarBE());
+
+            foreach (AvatarBE item in _listaAvatar)
+            {
+
+                usuarioBE.ListaAvatar.Add(new AvatarBE { IdAvatar = item.IdAvatar, Tag = item.Tag, URL = @"https://drive.google.com/uc?export=view&id=" + item.URL });
+            }
+
+            usuarioBE.Roles = new List<SelectListItem>();
+
+            usuarioBE.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador" });
+            usuarioBE.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador" });
+
             return View(new UsuarioBE());
         }
 
