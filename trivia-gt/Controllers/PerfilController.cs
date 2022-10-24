@@ -119,6 +119,8 @@ namespace trivia_gt.Controllers
             
             PerfilDAL perfilDAL = new();
 
+            entidad.IdRol = 1;
+
             _ = perfilDAL.Crear(entidad);
 
             HttpContext.Session.SetString("informacion", "Registro creado");
