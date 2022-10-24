@@ -28,7 +28,7 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-8 mx-auto">
                     <div class="card border-success overflow-auto mt-5">
-                    @using (Html.BeginForm("Crear", "Perfil", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmRegistrar", role = "form", autocomplete = "off" }))
+                    @using (Html.BeginForm("Crear", "Perfil", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmRegistrar", role = "form", @autocomplete = "off" }))
                         {
                             @Html.AntiForgeryToken()
 
@@ -74,7 +74,7 @@
 
                                     <div class="col-sm-4">
                                         <label asp-for="IdRol" class="form-label font-weight-bold text-success"></label>
-                                        @Html.DropDownListFor(model => model.IdRol, Model.Roles, new { @class = "form-select form-select-sm"})
+                                    @Html.DropDownListFor(model => model.IdRol, Model.Roles, new { @class = "form-select form-select-sm", @disabled = "disabled"})
                                         <span asp-validation-for="IdRol" class="text-danger"></span>
                                     </div>
 
