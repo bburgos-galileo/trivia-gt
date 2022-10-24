@@ -246,9 +246,8 @@ namespace trivia_gt.DAL
         {
             try
             {
-                string sql = "INSERT INTO usuarios SET nombres = @Nombres, apellidos = @Apellidos, " +
-                             "fechaNacimiento = @FechaNacimiento, correoElectronico = @CorreoElectronico, " +
-                             "contraseña = @Clave, idAvatar = 11 ";
+                string sql = "INSERT INTO usuarios (nombres, apellidos, fechaNacimiento, correoElectronico, contraseña, idAvatar, idRol) " +
+                             "VALUES (@Nombres,@Apellidos, @FechaNacimiento, @CorreoElectronico,@Contraseña,@IdAvatar, @IdRol);";
 
                 CrearComando(sql, CommandType.Text, _conexionSQL);
 

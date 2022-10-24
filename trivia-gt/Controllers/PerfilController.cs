@@ -105,7 +105,7 @@ namespace trivia_gt.Controllers
             usuarioBE.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador" });
             usuarioBE.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador" });
 
-            return View(new UsuarioBE());
+            return View(usuarioBE);
         }
 
         [HttpPost]
