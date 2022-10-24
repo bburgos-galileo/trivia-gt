@@ -111,7 +111,8 @@ namespace trivia_gt.Controllers
         [HttpPost]
         public IActionResult Crear(UsuarioBE entidad)
         {
-            PerfilDAL perfilDAL = new PerfilDAL();
+            
+            PerfilDAL perfilDAL = new();
 
             _ = perfilDAL.Crear(entidad);
 

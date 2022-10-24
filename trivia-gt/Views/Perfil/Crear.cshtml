@@ -29,7 +29,7 @@
             <div class="col-8 mt-2">
                 <div class="align-items-center justify-content-center">
                     <main role="main">
-                        @using (Html.BeginForm("Crear", "Perfil", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmRegistrar", role = "form" }))
+                        @using (Html.BeginForm("Crear", "Perfil", FormMethod.Post, new { @class = "form-floating bg-light", Id = "frmRegistrar", role = "form" }))
                         {
                             @Html.AntiForgeryToken()
 
@@ -121,6 +121,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/notify/notiflix-notify-aio-3.2.5.min.js"></script>
     <script src="~/js/dd.min.js" asp-append-version="true"></script>
+    
 
 </body>
 </html>
