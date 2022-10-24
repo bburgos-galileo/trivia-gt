@@ -194,7 +194,7 @@ namespace trivia_gt.DAL
             {
                 string sql = "UPDATE usuarios SET nombres = @Nombres, apellidos = @Apellidos, " +
                              "fechaNacimiento = @FechaNacimiento, correoElectronico = @CorreoElectronico, " +
-                             "contraseña = @Clave, idAvatar = @IdAvatar, idRol = @IdRol WHERE idUsuario= @IdUsuario";
+                             "contraseña = ifnull(@Clave, contraseña), idAvatar = @IdAvatar, idRol = @IdRol WHERE idUsuario= @IdUsuario";
 
                 CrearComando(sql, CommandType.Text, _conexionSQL);
 
@@ -210,8 +210,11 @@ namespace trivia_gt.DAL
                 CrearParametro("FechaNacimiento", entidad.FechaNacimiento);
                 AgregarParametro(_fechaNacimiento);
 
-                CrearParametro("Correo", entidad.Correo);
-                AgregarParametro(_correo);
+                if (entidad.Correo != null)
+                {
+                    CrearParametro("Correo", entidad.Correo);
+                    AgregarParametro(_correo);
+                }
 
                 CrearParametro("Clave", entidad.Clave);
                 AgregarParametro(_clave);
