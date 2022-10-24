@@ -46,6 +46,16 @@ namespace trivia_gt.Controllers
             HttpContext.Session.SetString("FechaConexion", listaUsuario[0].fechaUltimaConexion);
             HttpContext.Session.SetInt32("DiasConexion", int.Parse(listaUsuario[0].diasUltimaConexion));
 
+            if (HttpContext.Session.GetString("informacion") == null)
+            {
+                ViewBag.Info = null;
+            }
+            else
+            {
+                ViewBag.Info = HttpContext.Session.GetString("informacion");
+                HttpContext.Session.Remove("informacion");
+            }
+
             usuarioDAL.Actualizar(entidad);
 
             return Json(new { success = true, direccion = "/Home/Index" }, new Newtonsoft.Json.JsonSerializerSettings());

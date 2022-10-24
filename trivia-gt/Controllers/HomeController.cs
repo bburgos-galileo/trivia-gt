@@ -15,6 +15,11 @@ namespace trivia_gt.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("Correo") == null)
+            {
+                return Redirect("/Login/Login");
+            }
+
             ViewBag.Nombres = HttpContext.Session.GetString("Nombres");
             ViewBag.Imagen = @"https://drive.google.com/uc?export=view&id=" + HttpContext.Session.GetString("Imagen");
 

@@ -18,6 +18,11 @@ namespace trivia_gt.Controllers
             List<UsuarioBE> _lista = new List<UsuarioBE>();
             List<AvatarBE> _listaAvatar = new List<AvatarBE>();
 
+            if (HttpContext.Session.GetString("Correo") == null)
+            {
+                return Redirect("/Login/Login");
+            }
+
             usuarioBE.Correo = HttpContext.Session.GetString("Correo");
             
             
@@ -83,8 +88,8 @@ namespace trivia_gt.Controllers
             PerfilDAL perfilDAL = new PerfilDAL();
             AvatarDAL avatarDAL = new AvatarDAL();
 
-            List<UsuarioBE> _lista = new List<UsuarioBE>();
-            List<AvatarBE> _listaAvatar = new List<AvatarBE>();
+            List<UsuarioBE> _lista = new();
+            List<AvatarBE> _listaAvatar = new();
 
             usuarioBE.Correo = HttpContext.Session.GetString("Correo");
 
@@ -115,6 +120,8 @@ namespace trivia_gt.Controllers
             PerfilDAL perfilDAL = new();
 
             _ = perfilDAL.Crear(entidad);
+
+            HttpContext.Session.SetString("informacion", "Registro creado");
 
             return Redirect("/Login/Login");
 

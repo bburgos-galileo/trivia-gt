@@ -247,7 +247,7 @@ namespace trivia_gt.DAL
             try
             {
                 string sql = "INSERT INTO usuarios (nombres, apellidos, fechaNacimiento, correoElectronico, contraseña, idAvatar, idRol) " +
-                             "VALUES (@Nombres,@Apellidos, @FechaNacimiento, @CorreoElectronico,@Contraseña,@IdAvatar, @IdRol);";
+                             "VALUES (@Nombres,@Apellidos, @FechaNacimiento, @CorreoElectronico,@Clave,@IdAvatar, @IdRol);";
 
                 CrearComando(sql, CommandType.Text, _conexionSQL);
 
@@ -270,6 +270,8 @@ namespace trivia_gt.DAL
                     AgregarParametro(_clave);
                 }
 
+                CrearParametro("IdAvatar", entidad.IdAvatar);
+                AgregarParametro(_idAvatar);
 
                 CrearParametro("IdRol", entidad.IdRol);
                 AgregarParametro(_idRol);

@@ -37,3 +37,13 @@ function ShowLoginError(mensaje) {
     });
 
 }
+
+function ShowMensajeInformacion() {
+
+    var mensaje = document.getElementById("iInfo").value;
+
+    if (mensaje !== '') {
+        Notiflix.Notify.info(mensaje, { timeout: 3000 });
+        document.getElementById("iInfo").value = null;
+    }
+}

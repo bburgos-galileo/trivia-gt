@@ -24,11 +24,11 @@
 </head>
 <body style="background-color: #666!important; background-image:url(/images/gt_simbolos.jpg)">
 
-    <div class="container-fluid d-flex justify-content-sm-center align-items-center vh-100">
-            <div class="row d-flex">
-                <div class="col-8">
-                    <div class="card border-success overflow-auto">
-                        @using (Html.BeginForm("Crear", "Perfil", FormMethod.Post, new { @class = "form-floating bg-light", Id = "frmRegistrar", role = "form" }))
+    <div class="container d-flex h-100">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-8 mx-auto">
+                    <div class="card border-success overflow-auto mt-5">
+                        @using (Html.BeginForm("Crear", "Perfil", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmRegistrar", role = "form", autocomplete="off" }))
                         {
                             @Html.AntiForgeryToken()
 
@@ -53,12 +53,12 @@
 
                                     <div class="col-sm-4">
                                         <label asp-for="Nombres" data- class="form-label font-weight-bold text-success"></label>
-                                        <input asp-for="Nombres" class="form-control form-control-sm" />
+                                        <input asp-for="Nombres" class="form-control form-control-sm" autocomplete="off"/>
                                         <span asp-validation-for="Nombres" class="text-danger"></span>
                                     </div>
                                     <div class="col-sm-4">
                                         <label asp-for="Apellidos" class="form-label font-weight-bold text-success"></label>
-                                        <input asp-for="Apellidos" class="form-control form-control-sm" />
+                                        <input asp-for="Apellidos" class="form-control form-control-sm" autocomplete="off"/>
                                         <span asp-validation-for="Apellidos" class="text-danger"></span>
                                     </div>
                                     <div class="col-sm-4">
@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label asp-for="Correo" class="form-label  font-weight-bold text-success"></label>
-                                        <input asp-for="Correo" class="form-control form-control-sm" />
+                                        <input asp-for="Correo" class="form-control form-control-sm" autocomplete="off"/>
                                         <span asp-validation-for="Correo" class="text-danger"></span>
                                     </div>
 
@@ -82,17 +82,15 @@
 
                                     <div class="col-sm-4">
                                         <label asp-for="Clave" class="form-label font-weight-bold text-success"></label>
-                                        <input asp-for="Clave" class="form-control form-control-sm" />
+                                        <input asp-for="Clave" class="form-control form-control-sm" autocomplete="off"/>
                                         <span asp-validation-for="Clave" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-sm-4">
                                         <label asp-for="ConfirmacionClave" class="form-label font-weight-bold text-success"></label>
-                                        <input asp-for="ConfirmacionClave" class="form-control form-control-sm" />
+                                        <input asp-for="ConfirmacionClave" class="form-control form-control-sm" autocomplete="off"/>
                                         <span asp-validation-for="ConfirmacionClave" class="text-danger"></span>
                                     </div>
-
-
 
                                 </div>
                             </div>
