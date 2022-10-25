@@ -28,7 +28,8 @@ namespace trivia_gt.Models
 
         [DisplayName("Correo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El correo es un dato requerido")]
-        [EmailAddress(ErrorMessage = "La dirección de correo electrónico ingresada no es válida")]
+        [RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",
+                            ErrorMessage = "La dirección de correo electrónico ingresada no es válida")]
         [DataType(DataType.EmailAddress)]
         public string? Correo { get; set; }
 
