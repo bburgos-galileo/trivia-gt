@@ -67,5 +67,24 @@ namespace trivia_gt.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Construccion()
+        {
+            if (HttpContext.Session.GetString("Correo") == null)
+            {
+                return Redirect("/Login/Login");
+            }
+
+            ViewBag.Nombres = HttpContext.Session.GetString("Nombres");
+            ViewBag.Imagen = @"https://drive.google.com/uc?export=view&id=" + HttpContext.Session.GetString("Imagen");
+
+            ViewBag.Visible = false;
+            ViewBag.Nivel = 0;
+            ViewBag.Percentage = 0;
+            ViewBag.Mensaje = null;
+            ViewBag.Info = null;
+
+            return View();
+        }
     }
 }

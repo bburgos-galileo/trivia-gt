@@ -210,15 +210,11 @@ namespace trivia_gt.DAL
                 CrearParametro("FechaNacimiento", entidad.FechaNacimiento);
                 AgregarParametro(_fechaNacimiento);
 
-                
                 CrearParametro("Correo", entidad.Correo);
                 AgregarParametro(_correo);
 
-                if (entidad.Clave != null)
-                {
-                    CrearParametro("Clave", entidad.Clave);
-                    AgregarParametro(_clave);
-                }
+                CrearParametro("Clave", entidad.Clave);
+                AgregarParametro(_clave);
 
                 CrearParametro("IdAvatar", entidad.IdAvatar);
                 AgregarParametro(_idAvatar);

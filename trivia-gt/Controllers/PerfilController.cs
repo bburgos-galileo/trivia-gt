@@ -55,12 +55,15 @@ namespace trivia_gt.Controllers
             List<UsuarioBE> _lista = new List<UsuarioBE>();
 
             usuarioBE.Correo = HttpContext.Session.GetString("Correo");
+            entidad.Correo = usuarioBE.Correo;
 
             _ = perfilDAL.Actualizar(entidad);
             _lista = usuarioDAL.Listar(usuarioBE);
 
             HttpContext.Session.Remove("Imagen");
+            HttpContext.Session.Remove("Nombres");
             HttpContext.Session.SetString("Imagen", _lista[0].url);
+            HttpContext.Session.SetString("Nombres", _lista[0].Nombres + " " + _lista[0].Apellidos);
             HttpContext.Session.SetString("informacion", "Registro Actualizado");
 
             return Redirect("/Home/Index");
