@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace trivia_gt.Models
 {

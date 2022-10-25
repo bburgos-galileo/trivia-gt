@@ -27,85 +27,85 @@
     <div class="container d-flex h-100">
         <div class="row justify-content-center align-items-center">
             <div class="col-8 mx-auto">
-                    <div class="card border-success overflow-auto mt-5">
+                <div class="card border-success overflow-auto mt-5">
                     @using (Html.BeginForm("Crear", "Perfil", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmRegistrar", role = "form", @autocomplete = "off" }))
-                        {
-                            @Html.AntiForgeryToken()
+                    {
+                        @Html.AntiForgeryToken()
 
-                            <div class="card-header align-content-center text-center bg-primary d-block">
-                                <div class="col-sm-10">
-                                    @Html.LabelFor(model => model.IdAvatar, htmlAttributes: new { @class = "form-label font-weight-bold text-light" })
-                                    <select asp-for="IdAvatar" class="form-select form-select-sm" id="IdAvatar" name="IdAvatar" is="ms-dropdown">
-                                        @foreach (var item in Model.ListaAvatar)
-                                        {
-                                            <option value="@item.IdAvatar" data-image="@item.URL">@item.Tag</option>
-                                        }
-                                    </select>
-                                </div>
+                        <div class="card-header align-content-center text-center bg-primary d-block">
+                            <div class="col-sm-10">
+                                @Html.LabelFor(model => model.IdAvatar, htmlAttributes: new { @class = "form-label font-weight-bold text-light" })
+                                <select asp-for="IdAvatar" class="form-select form-select-sm" id="IdAvatar" name="IdAvatar" is="ms-dropdown">
+                                    @foreach (var item in Model.ListaAvatar)
+                                    {
+                                        <option value="@item.IdAvatar" data-image="@item.URL">@item.Tag</option>
+                                    }
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="card-body">
+                        <div class="card-body">
 
 
-                                <div class="row g-3">
+                            <div class="row g-3">
 
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                                    <div class="col-sm-4">
-                                        <label asp-for="Nombres" data- class="form-label font-weight-bold text-success"></label>
-                                        <input asp-for="Nombres" class="form-control form-control-sm" autocomplete="off"/>
-                                        <span asp-validation-for="Nombres" class="text-danger"></span>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label asp-for="Apellidos" class="form-label font-weight-bold text-success"></label>
-                                        <input asp-for="Apellidos" class="form-control form-control-sm" autocomplete="off"/>
-                                        <span asp-validation-for="Apellidos" class="text-danger"></span>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label asp-for="FechaNacimiento" class="form-label font-weight-bold text-success"></label>
-                                        <input asp-for="FechaNacimiento" class="form-control form-control-sm" asp-format="{0:dd/MM/yyyy}" />
-                                        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label asp-for="Correo" class="form-label  font-weight-bold text-success"></label>
-                                        <input asp-for="Correo" class="form-control form-control-sm" autocomplete="off"/>
-                                        <span asp-validation-for="Correo" class="text-danger"></span>
-                                    </div>
+                                <div class="col-sm-4">
+                                    <label asp-for="Nombres" data- class="form-label font-weight-bold text-success"></label>
+                                    <input asp-for="Nombres" class="form-control form-control-sm" autocomplete="off" />
+                                    <span asp-validation-for="Nombres" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label asp-for="Apellidos" class="form-label font-weight-bold text-success"></label>
+                                    <input asp-for="Apellidos" class="form-control form-control-sm" autocomplete="off" />
+                                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label asp-for="FechaNacimiento" class="form-label font-weight-bold text-success"></label>
+                                    <input asp-for="FechaNacimiento" class="form-control form-control-sm" asp-format="{0:dd/MM/yyyy}" />
+                                    <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label asp-for="Correo" class="form-label  font-weight-bold text-success"></label>
+                                    <input asp-for="Correo" class="form-control form-control-sm" autocomplete="off" />
+                                    <span asp-validation-for="Correo" class="text-danger"></span>
+                                </div>
 
-                                    <div class="col-sm-4">
-                                        <label asp-for="IdRol" class="form-label font-weight-bold text-success"></label>
+                                <div class="col-sm-4">
+                                    <label asp-for="IdRol" class="form-label font-weight-bold text-success"></label>
                                     @Html.DropDownListFor(model => model.IdRol, Model.Roles, new { @class = "form-select form-select-sm", @disabled = "disabled"})
-                                        <span asp-validation-for="IdRol" class="text-danger"></span>
-                                    </div>
-
-                                    <div class="col-sm-4"></div>
-
-                                    <div class="col-sm-4">
-                                        <label asp-for="Clave" class="form-label font-weight-bold text-success"></label>
-                                        <input asp-for="Clave" class="form-control form-control-sm" autocomplete="off"/>
-                                        <span asp-validation-for="Clave" class="text-danger"></span>
-                                    </div>
-
-                                    <div class="col-sm-4">
-                                        <label asp-for="ConfirmacionClave" class="form-label font-weight-bold text-success"></label>
-                                        <input asp-for="ConfirmacionClave" class="form-control form-control-sm" autocomplete="off"/>
-                                        <span asp-validation-for="ConfirmacionClave" class="text-danger"></span>
-                                    </div>
-
+                                    <span asp-validation-for="IdRol" class="text-danger"></span>
                                 </div>
-                            </div>
 
-                            <div class="card-footer bg-warning mt-2">
-                                <div class="text-end">
-                                    <input id="btnGrabar" type="submit" value="Grabar" class="btn btn-lg btn-group-lg btn-outline-primary" />
-                                    <a href="@Url.Action("Login", "Login")" class="btn btn-lg btn-group-lg btn-outline-success ms-2">Regresar</a>
+                                <div class="col-sm-4"></div>
+
+                                <div class="col-sm-4">
+                                    <label asp-for="Clave" class="form-label font-weight-bold text-success"></label>
+                                    <input asp-for="Clave" class="form-control form-control-sm" autocomplete="off" />
+                                    <span asp-validation-for="Clave" class="text-danger"></span>
                                 </div>
-                            </div>
 
-                        }
-                    </div>
+                                <div class="col-sm-4">
+                                    <label asp-for="ConfirmacionClave" class="form-label font-weight-bold text-success"></label>
+                                    <input asp-for="ConfirmacionClave" class="form-control form-control-sm" autocomplete="off" />
+                                    <span asp-validation-for="ConfirmacionClave" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="card-footer bg-warning mt-2">
+                            <div class="text-end">
+                                <input id="btnGrabar" type="submit" value="Grabar" class="btn btn-lg btn-group-lg btn-outline-primary" />
+                                <a href="@Url.Action("Login", "Login")" class="btn btn-lg btn-group-lg btn-outline-success ms-2">Regresar</a>
+                            </div>
+                        </div>
+
+                    }
                 </div>
             </div>
+        </div>
     </div>
 
     <script src="/lib/jquery/dist/jquery.min.js"></script>

@@ -57,6 +57,27 @@ namespace trivia_gt.Controllers
             usuarioBE.Correo = HttpContext.Session.GetString("Correo");
             entidad.Correo = usuarioBE.Correo;
 
+            if (entidad.IdRol == null)
+            {
+                entidad.IdRol = 1;
+            }
+
+            DateTime fechaNacimiento = Convert.ToDateTime(entidad.FechaNacimiento);
+            DateTime startDate = new DateTime(1921, 1, 1, 0, 0, 0);
+
+            if (fechaNacimiento < startDate || fechaNacimiento > DateTime.Now)
+            {
+                entidad.ListaAvatar = CargarAvatar();
+                entidad.Roles = new List<SelectListItem>();
+                entidad.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador", Selected = true });
+                entidad.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador" });
+
+                ModelState.AddModelError("FechaNacimiento", "La fecha de nacimiento no puede ser meno a 01/01/1921 ni mayor a hoy");
+                ModelState.Remove("IdRol");
+
+                return View(entidad);
+            }
+
             _ = perfilDAL.Actualizar(entidad);
             _lista = usuarioDAL.Listar(usuarioBE);
 
@@ -97,6 +118,23 @@ namespace trivia_gt.Controllers
 
             entidad.IdRol = 1;
 
+            DateTime fechaNacimiento = Convert.ToDateTime(entidad.FechaNacimiento);
+            DateTime startDate = new DateTime(1921, 1, 1, 0, 0, 0);
+
+            if (fechaNacimiento < startDate || fechaNacimiento > DateTime.Now)
+            {
+                entidad.ListaAvatar = CargarAvatar();
+                entidad.Roles = new List<SelectListItem>();
+                entidad.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador", Selected = true });
+                entidad.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador" });
+
+                ModelState.AddModelError("FechaNacimiento", "La fecha de nacimiento no puede ser meno a 01/01/1921 ni mayor a hoy");
+                ModelState.Remove("IdRol");
+
+                return View(entidad);
+            }
+
+
             if (CorreoYaRegistrado(entidad.Correo))
             {
 
@@ -111,7 +149,8 @@ namespace trivia_gt.Controllers
                 return View(entidad);
             }
 
-
+            
+            
             _ = perfilDAL.Crear(entidad);
 
             HttpContext.Session.SetString("informacion", "Registro creado");

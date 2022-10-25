@@ -60,7 +60,12 @@
 
                         <div class="col-md-4">
                             <label asp-for="IdRol" class="form-label font-weight-bold text-success"></label>
-                            @Html.DropDownListFor(model => model.IdRol, Model.Roles, new { @class = "form-select"})
+
+                            @if (Model.IdRol == 1){
+                                @Html.DropDownListFor(model => model.IdRol, Model.Roles, new { @class = "form-select", @disabled = "disabled"})
+                            } else {
+                                @Html.DropDownListFor(model => model.IdRol, Model.Roles, new { @class = "form-select"})
+                            }
                             <span asp-validation-for="IdRol" class="text-danger"></span>
                         </div>
 
