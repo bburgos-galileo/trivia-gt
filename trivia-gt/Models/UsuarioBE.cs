@@ -13,10 +13,14 @@ namespace trivia_gt.Models
 
         [DisplayName("Nombre")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El nombre de usuario es un dato requerido")]
+        [RegularExpression(@"^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$", ErrorMessage = "El nombre ingresado no es valido")]
+        [StringLength(30, MinimumLength = 2, ErrorMessage = "El nombre debe contener entre 2 y 30 caracteres")]
         public string? Nombres { get; set; }
 
         [DisplayName("Apellidos")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El apellido del usuario es un dato requerido")]
+        [RegularExpression(@"^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$", ErrorMessage = "El apellido ingresado no es valido")]
+        [StringLength(30, MinimumLength = 2, ErrorMessage = "El apellido debe contener entre 2 y 30 caracteres")]
         public string? Apellidos { get; set; }
 
         [DisplayName("Fecha de nacimiento")]
