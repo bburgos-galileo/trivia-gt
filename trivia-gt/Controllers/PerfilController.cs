@@ -67,12 +67,19 @@ namespace trivia_gt.Controllers
 
             if (fechaNacimiento < startDate || fechaNacimiento > DateTime.Now)
             {
+                ViewBag.Nombres = HttpContext.Session.GetString("Nombres");
+                ViewBag.Imagen = @"https://drive.google.com/uc?export=view&id=" + HttpContext.Session.GetString("Imagen");
+                ViewBag.Visible = false;
+                ViewBag.Nivel = 0;
+                ViewBag.Percentage = 0;
+                ViewBag.ImagenCombo = @"https://drive.google.com/uc?export=view&id=1wQ3L1xIfvyfoUueYKik5GTNTM1tYU89w";
+
                 entidad.ListaAvatar = CargarAvatar();
                 entidad.Roles = new List<SelectListItem>();
                 entidad.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador", Selected = true });
                 entidad.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador" });
 
-                ModelState.AddModelError("FechaNacimiento", "La fecha de nacimiento no puede ser meno a 01/01/1921 ni mayor a hoy");
+                ModelState.AddModelError("FechaNacimiento", "La fecha de nacimiento no puede ser menor a 01/01/1921 ni mayor a hoy");
                 ModelState.Remove("IdRol");
 
                 return View(entidad);
@@ -128,7 +135,7 @@ namespace trivia_gt.Controllers
                 entidad.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador", Selected = true });
                 entidad.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador" });
 
-                ModelState.AddModelError("FechaNacimiento", "La fecha de nacimiento no puede ser meno a 01/01/1921 ni mayor a hoy");
+                ModelState.AddModelError("FechaNacimiento", "La fecha de nacimiento no puede ser menor a 01/01/1921 ni mayor a hoy");
                 ModelState.Remove("IdRol");
 
                 return View(entidad);
