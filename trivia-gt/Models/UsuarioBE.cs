@@ -27,7 +27,8 @@ namespace trivia_gt.Models
         public string? FechaNacimiento { get; set; }
 
         [DisplayName("Correo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El usuario es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El correo es un dato requerido")]
+        [EmailAddress(ErrorMessage = "La dirección de correo electrónico ingresada no es válida")]
         [DataType(DataType.EmailAddress)]
         public string? Correo { get; set; }
 

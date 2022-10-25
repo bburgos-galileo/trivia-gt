@@ -13,10 +13,8 @@ namespace trivia_gt.Controllers
         {
             UsuarioBE usuarioBE = new UsuarioBE();
             PerfilDAL perfilDAL = new PerfilDAL();
-            AvatarDAL avatarDAL = new AvatarDAL();
 
             List<UsuarioBE> _lista = new List<UsuarioBE>();
-            List<AvatarBE> _listaAvatar = new List<AvatarBE>();
 
             if (HttpContext.Session.GetString("Correo") == null)
             {
@@ -27,21 +25,12 @@ namespace trivia_gt.Controllers
             
             
             _lista = perfilDAL.Listar(usuarioBE);
-            _listaAvatar = avatarDAL.Listar(new AvatarBE());
 
             usuarioBE = _lista[0];
             usuarioBE.ListaAvatar = new List<AvatarBE>();
-
-            bool seleccionar = false;
-
-            foreach (AvatarBE item in _listaAvatar)
-            {
-
-                usuarioBE.ListaAvatar.Add(new AvatarBE { IdAvatar = item.IdAvatar, Tag = item.Tag, URL = @"https://drive.google.com/uc?export=view&id=" + item.URL });
-            }
+            usuarioBE.ListaAvatar.AddRange(CargarAvatar());
 
             usuarioBE.Roles = new List<SelectListItem>();
-
             usuarioBE.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador" });
             usuarioBE.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador" });
 
@@ -74,9 +63,6 @@ namespace trivia_gt.Controllers
             HttpContext.Session.SetString("Imagen", _lista[0].url);
             HttpContext.Session.SetString("informacion", "Registro Actualizado");
 
- 
-
-
             return Redirect("/Home/Index");
 
         }
@@ -86,29 +72,16 @@ namespace trivia_gt.Controllers
         {
             UsuarioBE usuarioBE = new UsuarioBE();
             PerfilDAL perfilDAL = new PerfilDAL();
-            AvatarDAL avatarDAL = new AvatarDAL();
-
-            List<UsuarioBE> _lista = new();
-            List<AvatarBE> _listaAvatar = new();
 
             usuarioBE.Correo = HttpContext.Session.GetString("Correo");
 
+            List<UsuarioBE> _lista = perfilDAL.Listar(usuarioBE);
 
-            _lista = perfilDAL.Listar(usuarioBE);
-            _listaAvatar = avatarDAL.Listar(new AvatarBE());
-
-            usuarioBE.ListaAvatar = new List<AvatarBE>();
-
-            foreach (AvatarBE item in _listaAvatar)
-            {
-
-                usuarioBE.ListaAvatar.Add(new AvatarBE { IdAvatar = item.IdAvatar, Tag = item.Tag, URL = @"https://drive.google.com/uc?export=view&id=" + item.URL });
-            }
-
+            usuarioBE.ListaAvatar = CargarAvatar();
             usuarioBE.Roles = new List<SelectListItem>();
-
-            usuarioBE.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador" });
+            usuarioBE.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador", Selected = true });
             usuarioBE.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador" });
+            usuarioBE.IdRol = 1;
 
             return View(usuarioBE);
         }
@@ -121,12 +94,58 @@ namespace trivia_gt.Controllers
 
             entidad.IdRol = 1;
 
+            if (CorreoYaRegistrado(entidad.Correo))
+            {
+
+                entidad.ListaAvatar = CargarAvatar();
+                entidad.Roles = new List<SelectListItem>();
+                entidad.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador" , Selected = true });
+                entidad.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador"});
+
+                ModelState.AddModelError("Correo", "El correo ingresado ya esta registrado");
+                ModelState.Remove("IdRol");
+
+                return View(entidad);
+            }
+
+
             _ = perfilDAL.Crear(entidad);
 
             HttpContext.Session.SetString("informacion", "Registro creado");
 
             return Redirect("/Login/Login");
 
+        }
+
+        private List<AvatarBE> CargarAvatar()
+        {
+            AvatarDAL avatarDAL = new AvatarDAL();
+
+            List<AvatarBE> _listaAvatar = avatarDAL.Listar(new AvatarBE());
+
+            return _listaAvatar;
+
+        }
+
+        private bool CorreoYaRegistrado(string correo)
+        {
+            UsuarioBE usuarioBE = new UsuarioBE();
+            PerfilDAL perfilDAL = new PerfilDAL();
+
+            List<UsuarioBE> _lista = new List<UsuarioBE>();
+
+            usuarioBE.Correo = correo;
+
+            _lista = perfilDAL.Listar(usuarioBE);
+
+            if (_lista.Any())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

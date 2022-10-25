@@ -79,7 +79,7 @@ namespace trivia_gt.DAL
                     _be = new AvatarBE
                     {
                         IdAvatar = (int)item["IdAvatar"],
-                        URL = item["url"].ToString(),
+                        URL = @"https://drive.google.com/uc?export=view&id=" + item["url"].ToString(),
                         Tag = item["tag"].ToString()
 
                     };
