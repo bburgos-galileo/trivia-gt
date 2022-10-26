@@ -81,6 +81,7 @@ namespace trivia_gt.Controllers
 
                 ModelState.AddModelError("FechaNacimiento", "La fecha de nacimiento no puede ser menor a 01/01/1921 ni mayor a hoy");
                 ModelState.Remove("IdRol");
+                ModelState.Remove("Correo");
 
                 return View(entidad);
             }
