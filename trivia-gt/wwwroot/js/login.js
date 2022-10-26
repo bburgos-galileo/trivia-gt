@@ -7,6 +7,10 @@
 
         var form = $("#frmLogin");
 
+        Notiflix.Loading.arrows('Verificando...', {
+            backgroundColor: 'rgba(0,0,0,0.8)',
+        });
+
         $.ajax({
             cache: false,
             url: $(this).data("url"),
@@ -14,7 +18,9 @@
             dataType: 'json',
             data: form.serialize(),
             success: (result) => {
-                
+
+                Notiflix.Loading.remove();
+
                 if (result.success == true) {
                     window.location = result.direccion;
                 } else {

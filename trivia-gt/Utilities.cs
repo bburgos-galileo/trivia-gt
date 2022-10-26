@@ -11,6 +11,44 @@ namespace trivia_gt
 {
     public static class Utilities
     {
+        public static void CargaPreguntas(this ISession session, int grupo, string url)
+        {
+            //http://ec2-44-203-35-246.compute-1.amazonaws.com/preguntas.php?nivel=
+
+            List<PreguntaJsonBE> listaJson = new List<PreguntaJsonBE>();
+
+            session.Remove("preguntasJson");
+
+            for (int i = 1; i <= 10; i++)
+            {
+                string apiURL = url + i + "&grupo=" + grupo;
+
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage response = httpClient.GetAsync(apiURL).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string message = response.Content.ReadAsStringAsync().Result;
+                    string parsedString = Regex.Unescape(message);
+                    byte[] isoBites = Encoding.UTF8.GetBytes(parsedString);
+                    string respuesta = Encoding.UTF8.GetString(isoBites, 0, isoBites.Length);
+
+                    var json = respuesta.Replace(":{", ":[{").Replace("},", "}],").Replace("}}", "}]}");
+
+                    List<PreguntaJsonBE>? respuestaArray = JsonConvert.DeserializeObject<List<PreguntaJsonBE>>("[" + json + "]");
+
+                    listaJson.Add(respuestaArray[0]);
+
+                }
+                else
+                {
+                    throw new Exception("Error al obtener la pregunta");
+                }
+            }
+
+            session.SetString("preguntasJson", JsonConvert.SerializeObject(listaJson));
+
+        }
+
         public static List<PreguntaBE> ListarPreguntas(this ISession session, int idUsuario)
         {
             try
@@ -30,7 +68,7 @@ namespace trivia_gt
 
                 for (int i = 1; i <= 10; i++)
                 {
-                    PreguntaJsonBE preguntaJson = ObtenerPregunta(session, i.ToString(), i);
+                    PreguntaJsonBE preguntaJson = ObtienePreguntaJson(session, i - 1);
 
                     bool existe = listaBD.Exists(p => p.idPregunta.Equals(i));
 
@@ -107,45 +145,6 @@ namespace trivia_gt
             {
 
                 throw new Exception(e.Message);
-            }
-        }
-        public static PreguntaJsonBE ObtenerPregunta(this ISession session, string nivel, int index)
-        {
-			try
-			{
-                if (session.GetString("preguntasJson") == null)
-                {
-                    string apiURL = "http://ec2-44-203-35-246.compute-1.amazonaws.com/preguntas.php?nivel=" + nivel + "&grupo=1";
-
-                    HttpClient httpClient = new HttpClient();
-                    HttpResponseMessage response = httpClient.GetAsync(apiURL).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string message = response.Content.ReadAsStringAsync().Result;
-                        string parsedString = Regex.Unescape(message);
-                        byte[] isoBites = Encoding.UTF8.GetBytes(parsedString);
-                        string respuesta = Encoding.UTF8.GetString(isoBites, 0, isoBites.Length);
-
-                        var json = respuesta.Replace(":{", ":[{").Replace("},", "}],").Replace("}}", "}]}");
-
-                        List<PreguntaJsonBE>? respuestaArray = JsonConvert.DeserializeObject<List<PreguntaJsonBE>>("[" + json + "]");
-
-                        return respuestaArray[0];
-
-                    }
-                    else
-                    {
-                        throw new Exception("Error al obtener la pregunta");
-                    }
-                }
-                else
-                {
-                    return ObtienePreguntaJson(session, index - 1);
-                }
-            }
-			catch (Exception)
-			{
-                throw new Exception("Error al obtener la pregunta");
             }
         }
 

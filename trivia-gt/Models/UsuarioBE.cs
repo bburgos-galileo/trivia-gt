@@ -64,9 +64,9 @@ namespace trivia_gt.Models
         [HiddenInput(DisplayValue = false)]
         public string? diasUltimaConexion { get; set; }
 
-        public List<SelectListItem> Roles { get; set; }
+        public List<SelectListItem>? Roles { get; set; }
 
-        public List<AvatarBE> ListaAvatar { get; set; }
+        public List<AvatarBE>? ListaAvatar { get; set; }
     }
 
 }

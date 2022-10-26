@@ -48,9 +48,9 @@ namespace trivia_gt.Controllers
         [HttpPost]
         public IActionResult Editar(UsuarioBE entidad)
         {
-            PerfilDAL perfilDAL = new PerfilDAL();
-            UsuarioBE usuarioBE = new UsuarioBE();
-            UsuarioDAL usuarioDAL = new UsuarioDAL();
+            PerfilDAL perfilDAL = new();
+            UsuarioBE usuarioBE = new();
+            UsuarioDAL usuarioDAL = new();
 
             List<UsuarioBE> _lista = new List<UsuarioBE>();
 

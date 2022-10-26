@@ -15,7 +15,7 @@ namespace trivia_gt.Controllers
         [Produces("application/json")]
         public IActionResult Login(UsuarioBE entidad)
         {
-            UsuarioDAL usuarioDAL = new UsuarioDAL();
+            UsuarioDAL usuarioDAL = new();
 
             if (entidad.Correo == null)
             {
@@ -57,6 +57,8 @@ namespace trivia_gt.Controllers
             }
 
             usuarioDAL.Actualizar(entidad);
+
+            Utilities.CargaPreguntas(HttpContext.Session, 1, @"http://ec2-44-203-35-246.compute-1.amazonaws.com/preguntas.php?nivel=");
 
             return Json(new { success = true, direccion = "/Home/Index" }, new Newtonsoft.Json.JsonSerializerSettings());
         }

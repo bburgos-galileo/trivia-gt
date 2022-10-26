@@ -23,7 +23,7 @@ namespace trivia_gt.Controllers
             ViewBag.Nombres = HttpContext.Session.GetString("Nombres");
             ViewBag.Imagen = @"https://drive.google.com/uc?export=view&id=" + HttpContext.Session.GetString("Imagen");
 
-            Int32 dias = (int)HttpContext.Session.GetInt32("DiasConexion");
+            int dias = (int)HttpContext.Session.GetInt32("DiasConexion");
 
             if (dias > 1)
             {
