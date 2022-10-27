@@ -11,10 +11,10 @@ namespace trivia_gt.Controllers
         [HttpGet]
         public IActionResult Editar()
         {
-            ConfiguracionBE usuarioBE = new ConfiguracionBE();
+            UsuarioBE usuarioBE = new UsuarioBE();
             PerfilDAL perfilDAL = new PerfilDAL();
 
-            List<ConfiguracionBE> _lista = new List<ConfiguracionBE>();
+            List<UsuarioBE> _lista = new List<UsuarioBE>();
 
             if (HttpContext.Session.GetString("Correo") == null)
             {
@@ -46,13 +46,13 @@ namespace trivia_gt.Controllers
         }
 
         [HttpPost]
-        public IActionResult Editar(ConfiguracionBE entidad)
+        public IActionResult Editar(UsuarioBE entidad)
         {
             PerfilDAL perfilDAL = new();
-            ConfiguracionBE usuarioBE = new();
+            UsuarioBE usuarioBE = new();
             UsuarioDAL usuarioDAL = new();
 
-            List<ConfiguracionBE> _lista = new List<ConfiguracionBE>();
+            List<UsuarioBE> _lista = new List<UsuarioBE>();
 
             usuarioBE.Correo = HttpContext.Session.GetString("Correo");
             entidad.Correo = usuarioBE.Correo;
@@ -102,12 +102,12 @@ namespace trivia_gt.Controllers
         [HttpGet]
         public IActionResult Crear()
         {
-            ConfiguracionBE usuarioBE = new ConfiguracionBE();
+            UsuarioBE usuarioBE = new UsuarioBE();
             PerfilDAL perfilDAL = new PerfilDAL();
 
             usuarioBE.Correo = HttpContext.Session.GetString("Correo");
 
-            List<ConfiguracionBE> _lista = perfilDAL.Listar(usuarioBE);
+            List<UsuarioBE> _lista = perfilDAL.Listar(usuarioBE);
 
             usuarioBE.ListaAvatar = CargarAvatar();
             usuarioBE.Roles = new List<SelectListItem>();
@@ -119,7 +119,7 @@ namespace trivia_gt.Controllers
         }
 
         [HttpPost]
-        public IActionResult Crear(ConfiguracionBE entidad)
+        public IActionResult Crear(UsuarioBE entidad)
         {
             
             PerfilDAL perfilDAL = new();
@@ -179,10 +179,10 @@ namespace trivia_gt.Controllers
 
         private bool CorreoYaRegistrado(string correo)
         {
-            ConfiguracionBE usuarioBE = new ConfiguracionBE();
+            UsuarioBE usuarioBE = new UsuarioBE();
             PerfilDAL perfilDAL = new PerfilDAL();
 
-            List<ConfiguracionBE> _lista = new List<ConfiguracionBE>();
+            List<UsuarioBE> _lista = new List<UsuarioBE>();
 
             usuarioBE.Correo = correo;
 

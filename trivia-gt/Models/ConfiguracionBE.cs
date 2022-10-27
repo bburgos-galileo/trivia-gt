@@ -1,12 +1,13 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace trivia_gt.Models
 {
     public class ConfiguracionBE
     {
+        [Key]
+        [HiddenInput(DisplayValue = false)]
         public int idConfiguracion { get; set; }
 
         [DisplayName("URL de la API")]
@@ -16,6 +17,5 @@ namespace trivia_gt.Models
         [DisplayName("Numero de Grupo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Debe de indicar el numero de grupo")]
         public string? noGrupo { get; set; }
-
     }
 }

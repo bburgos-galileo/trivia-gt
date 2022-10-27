@@ -19,21 +19,6 @@ namespace trivia_gt.DAL
             _conexionSQL = Conexion.ObtenerConexion();
         }
 
-        public bool Actualizar(ConfiguracionBE entidad)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AgregarParametro(MySqlParameter parametro)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Crear(ConfiguracionBE entidad)
-        {
-            throw new NotImplementedException();
-        }
-
         public void CrearComando(string cmdText, CommandType tipo, MySqlConnection conexion)
         {
             _comandoSQL = new MySqlCommand(cmdText, conexion)
@@ -76,7 +61,11 @@ namespace trivia_gt.DAL
             }
         }
 
-        public bool Eliminar(ConfiguracionBE entidad)
+        public void AgregarParametro(MySqlParameter parametro)
+        {
+            throw new NotImplementedException();
+        }
+        public DataTable ListarDS(ConfiguracionBE entidad)
         {
             throw new NotImplementedException();
         }
@@ -86,9 +75,20 @@ namespace trivia_gt.DAL
             throw new NotImplementedException();
         }
 
-        public DataTable ListarDS(ConfiguracionBE entidad)
+        public int Crear(ConfiguracionBE entidad)
         {
             throw new NotImplementedException();
         }
+
+        public bool Actualizar(ConfiguracionBE entidad)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Eliminar(ConfiguracionBE entidad)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -13,7 +13,7 @@ namespace trivia_gt.Controllers
 
         [HttpPost]
         [Produces("application/json")]
-        public IActionResult Login(ConfiguracionBE entidad)
+        public IActionResult Login(UsuarioBE entidad)
         {
             UsuarioDAL usuarioDAL = new();
 
@@ -27,7 +27,7 @@ namespace trivia_gt.Controllers
                 return Json(new { success = false, message = "<p class='h5'>La contraseña es un dato requerido</p>" }, new Newtonsoft.Json.JsonSerializerSettings());
             }
 
-            List<ConfiguracionBE> listaUsuario = usuarioDAL.Listar(entidad);
+            List<UsuarioBE> listaUsuario = usuarioDAL.Listar(entidad);
 
             if (listaUsuario.Count == 0)
             {
