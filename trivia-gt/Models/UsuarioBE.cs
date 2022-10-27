@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace trivia_gt.Models
 {
-    public class UsuarioBE
+    public class ConfiguracionBE
     {
         [Key]
         [HiddenInput(DisplayValue = false)]

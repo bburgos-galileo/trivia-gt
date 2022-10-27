@@ -4,7 +4,7 @@ using trivia_gt.Models;
 
 namespace trivia_gt.DAL
 {
-    public class UsuarioDAL : IDALBase<UsuarioBE>
+    public class UsuarioDAL : IDALBase<ConfiguracionBE>
     {
         MySqlConnection _conexionSQL;
         MySqlCommand _comandoSQL;
@@ -45,7 +45,7 @@ namespace trivia_gt.DAL
             _comandoSQL.Parameters.Add(parametro);
         }
 
-        public DataTable ListarDS(UsuarioBE entidad)
+        public DataTable ListarDS(ConfiguracionBE entidad)
         {
             try
             {
@@ -84,12 +84,12 @@ namespace trivia_gt.DAL
             }
         }
 
-        public List<UsuarioBE> Listar(UsuarioBE entidad)
+        public List<ConfiguracionBE> Listar(ConfiguracionBE entidad)
         {
             try
             {
-                List<UsuarioBE> _lista = new List<UsuarioBE>();
-                UsuarioBE _be;
+                List<ConfiguracionBE> _lista = new List<ConfiguracionBE>();
+                ConfiguracionBE _be;
 
                 DataTable _dt = new DataTable();
 
@@ -97,7 +97,7 @@ namespace trivia_gt.DAL
 
                 foreach (DataRow item in _dt.Rows)
                 {
-                    _be = new UsuarioBE
+                    _be = new ConfiguracionBE
                     {
                         IdUsuario = (int)item["idUsuario"],
                         Nombres = item["nombres"].ToString(),
@@ -121,7 +121,7 @@ namespace trivia_gt.DAL
             }
         }
 
-        public bool Actualizar(UsuarioBE entidad)
+        public bool Actualizar(ConfiguracionBE entidad)
         {
             try
             {
@@ -148,12 +148,12 @@ namespace trivia_gt.DAL
             }
         }
 
-        public int Crear(UsuarioBE entidad)
+        public int Crear(ConfiguracionBE entidad)
         {
             throw new NotImplementedException();
         }
 
-        public bool Eliminar(UsuarioBE entidad)
+        public bool Eliminar(ConfiguracionBE entidad)
         {
             throw new NotImplementedException();
         }
