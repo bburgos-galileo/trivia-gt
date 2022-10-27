@@ -8,7 +8,7 @@ namespace trivia_gt.DAL
         private static MySqlConnection ConexionSQL { get; set; }
 
 
-        public static MySqlConnection ObtenerConexion() => ConexionSQL = new MySqlConnection("Server='mysql-server-bb.mysql.database.azure.com';UserID ='bburgos';Password='Admin2@22';Database='trivia-gt'");
+        public static MySqlConnection ObtenerConexion() => ConexionSQL = new MySqlConnection("Server='mysql-server-bb.mysql.database.azure.com';UserID ='bburgos';Password='AdminGT2@22*';Database='trivia-gt'");
 
 
     }
