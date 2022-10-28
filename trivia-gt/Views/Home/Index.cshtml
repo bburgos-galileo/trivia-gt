@@ -3,6 +3,7 @@
     string imageLibro = ViewBag.ImagenLibro;
     string imageAnimo = ViewBag.ImagenAnimo;
     string fecha = ViewBag.Fecha;
+    int IdRol = ViewBag.IdRol;
 }
 
 <div class="text-center">
@@ -28,8 +29,17 @@
                 </div>
                 <div class="card-body">
                     <figcaption class="figure-caption" style="font-size:large!important">
-                        <a class="btn btn-lg btn-success fs-1" href="@Url.Action("Index", "Preguntas")">
-                            <span class="fs-1"><i class="fa fa-play-circle me-2"></i></span>Jugar</a>
+                       @if(IdRol == 1){
+                            <a class="btn btn-lg btn-success fs-1" href="@Url.Action("Index", "Preguntas")">
+                                <span class="fs-1"><i class="fa fa-play-circle me-2"></i></span>Jugar
+                            </a>
+                       }
+                       else{
+                            <a class="btn btn-lg btn-success fs-1" href="#">
+                                <span class="fs-1"><i class="fa fa-play-circle me-2"></i></span>Jugar
+                            </a>
+                       }
+                   
                      </figcaption>
                 </div>
             </figure>
