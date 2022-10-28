@@ -29,6 +29,7 @@ namespace trivia_gt.Controllers
             }
 
             ViewBag.Nombres = HttpContext.Session.GetString("Nombres");
+            ViewBag.IdRol = HttpContext.Session.GetInt32("IdRol");
             ViewBag.Imagen = @"https://drive.google.com/uc?export=view&id=" + HttpContext.Session.GetString("Imagen");
             ViewBag.Visible = false;
             ViewBag.Nivel = 0;

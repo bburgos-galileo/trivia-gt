@@ -40,6 +40,7 @@ namespace trivia_gt.Controllers
             }
 
             HttpContext.Session.SetInt32("IdUsuario", listaUsuario[0].IdUsuario);
+            HttpContext.Session.SetInt32("IdRol", int.Parse(listaUsuario[0].IdRol.ToString()));
             HttpContext.Session.SetString("Nombres", listaUsuario[0].Nombres + " " + listaUsuario[0].Apellidos);
             HttpContext.Session.SetString("Correo", entidad.Correo);
             HttpContext.Session.SetString("Imagen", listaUsuario[0].url);

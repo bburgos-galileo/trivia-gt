@@ -51,7 +51,7 @@ namespace trivia_gt.DAL
             {
                 string sql = "select u.idUsuario, u.nombres, u.apellidos, u.fechaNacimiento, u.correoElectronico, " +
                              "u.contraseña, a.url, DATE_FORMAT(ifnull(u.ultimaConexion, now()), '%d/%m/%Y') ultimaConexion, " +
-                             "convert(datediff(now(),ifnull(u.ultimaConexion, now())), char) diasUltimaConn " +
+                             "convert(datediff(now(),ifnull(u.ultimaConexion, now())), char) diasUltimaConn, u.idRol " +
                              "from usuarios u inner join avatar a on u.idAvatar = a.idAvatar " +
                              "where u.correoElectronico = @Correo";
 
@@ -100,6 +100,7 @@ namespace trivia_gt.DAL
                     _be = new UsuarioBE
                     {
                         IdUsuario = (int)item["idUsuario"],
+                        IdRol = (int)item["idRol"],
                         Nombres = item["nombres"].ToString(),
                         Apellidos = item["apellidos"].ToString(),
                         Correo = item["correoElectronico"].ToString(),

@@ -59,6 +59,8 @@ namespace trivia_gt.Controllers
                 HttpContext.Session.Remove("informacion");
             }
 
+            ViewBag.IdRol = HttpContext.Session.GetInt32("IdRol");
+
             return View();
         }
 
@@ -83,6 +85,7 @@ namespace trivia_gt.Controllers
             ViewBag.Percentage = 0;
             ViewBag.Mensaje = null;
             ViewBag.Info = null;
+            ViewBag.IdRol = HttpContext.Session.GetInt32("IdRol");
 
             return View();
         }

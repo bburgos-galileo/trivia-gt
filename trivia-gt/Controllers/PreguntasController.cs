@@ -19,6 +19,7 @@ namespace trivia_gt.Controllers
             ViewBag.Nombres = HttpContext.Session.GetString("Nombres");
             ViewBag.Imagen = @"https://drive.google.com/uc?export=view&id=" + HttpContext.Session.GetString("Imagen");
             ViewBag.ImagenLibro = @"https://drive.google.com/uc?export=view&id=1JC2aNjxTR3he5mywYJY_lnCwG0duZUpp";
+            ViewBag.IdRol = HttpContext.Session.GetInt32("IdRol");
 
             Int32 dias = (int)HttpContext.Session.GetInt32("DiasConexion");
 
@@ -75,7 +76,6 @@ namespace trivia_gt.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public ActionResult Grabar(PreguntaBE entidad)
         {
             PreguntaDAL preguntaDAL = new PreguntaDAL();

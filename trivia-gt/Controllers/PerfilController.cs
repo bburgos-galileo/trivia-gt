@@ -41,6 +41,7 @@ namespace trivia_gt.Controllers
             ViewBag.Nivel = 0;
             ViewBag.Percentage = 0;
             ViewBag.ImagenCombo = @"https://drive.google.com/uc?export=view&id=1wQ3L1xIfvyfoUueYKik5GTNTM1tYU89w";
+            ViewBag.IdRol = HttpContext.Session.GetInt32("IdRol");
 
             return View(usuarioBE);
         }
@@ -114,6 +115,8 @@ namespace trivia_gt.Controllers
             usuarioBE.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador", Selected = true });
             usuarioBE.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador" });
             usuarioBE.IdRol = 1;
+
+            
 
             return View(usuarioBE);
         }
