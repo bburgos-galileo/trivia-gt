@@ -130,19 +130,46 @@ namespace trivia_gt.DAL
 
         public bool Actualizar(ConfiguracionBE entidad)
         {
-            throw new NotImplementedException();
+            {
+                try
+                {
+                    string sql = "UPDATE configuracion set idConfiguracion = @idConfiguracion, urlApi = @urlApi, noGrupo = @noGrupo";
+
+                    CrearComando(sql, CommandType.Text, _conexionSQL);
+
+                    CrearParametro("idConfiguracion", entidad.idConfiguracion);
+                    AgregarParametro(_idConfiguracion);
+
+                    CrearParametro("urlApi", entidad.urlApi);
+                    AgregarParametro(_urlApi);
+
+                    CrearParametro("noGrupo", entidad.noGrupo);
+                    AgregarParametro(_noGrupo);
+
+                    _conexionSQL.Open();
+                    _comandoSQL.ExecuteNonQuery();
+                    _conexionSQL.Close();
+
+                    return 1;
+
+                }
+                catch (Exception ex)
+                {
+                    if (_conexionSQL.State == ConnectionState.Open)
+                        _conexionSQL.Close();
+
+                    throw new Exception(ex.Message);
+                }
+            }
         }
         public int Crear(ConfiguracionBE entidad)
         {
             try
             {
-                string sql = "INSERT INTO configuracion SET idConfiguracion = @idConfiguracion, urlApi = @urlApi, " +
-                             "noGrupo = @noGrupo, ";
+                string sql = "INSERT INTO configuracion (urlApi, noGrupo)" +
+                             "VALUES (@urlApi, @noGrupo) ";
 
                 CrearComando(sql, CommandType.Text, _conexionSQL);
-
-                CrearParametro("idConfiguracion", entidad.idConfiguracion);
-                AgregarParametro(_idConfiguracion);
 
                 CrearParametro("urlApi", entidad.urlApi);
                 AgregarParametro(_urlApi);

@@ -1,0 +1,41 @@
+﻿@model trivia_gt.Models.ConfiguracionBE
+
+@{
+    ViewData["Title"] = "Configuracion";
+}
+
+
+<div class="row m-2">
+    <div class="col-md-10">
+        <div class="card border-success overflow-auto">
+
+            @using (Html.BeginForm("Editar", "Configuracion", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmEditarConfiguracion", role = "form", @autocomplete = "off" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.idConfiguracion, new { @id = "hdidConfiguracion" })
+
+                <div class="form-group">
+                    <label asp-for="urlApi" class="control-label"></label>
+                    <input asp-for="urlApi" class="form-control" />
+                    <span asp-validation-for="urlApi" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="noGrupo" class="control-label"></label>
+                    <input asp-for="noGrupo" class="form-control" />
+                    <span asp-validation-for="noGrupo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
