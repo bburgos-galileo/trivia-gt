@@ -154,7 +154,7 @@ namespace trivia_gt.DAL
                 _comandoSQL.ExecuteNonQuery();
                 _conexionSQL.Close();
 
-                return true;
+                return 1;
 
             }
             catch (Exception ex)
