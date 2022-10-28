@@ -63,26 +63,107 @@ namespace trivia_gt.DAL
 
         public void AgregarParametro(MySqlParameter parametro)
         {
-            throw new NotImplementedException();
+            _comandoSQL.Parameters.Add(parametro);
         }
         public DataTable ListarDS(ConfiguracionBE entidad)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string sql = "select idconfiguracion, urlApi, noGrupo from configuracion";
+
+                using (MySqlConnection connection = _conexionSQL)
+                {
+                    CrearComando(sql, CommandType.Text, _conexionSQL);
+
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(_comandoSQL))
+                    {
+                        using (DataTable dt = new DataTable())
+                        {
+                            DataSet _ds = new DataSet();
+                            connection.Open();
+                            da.Fill(dt);
+
+                            return dt;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (_conexionSQL.State == ConnectionState.Open)
+                    _conexionSQL.Close();
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<ConfiguracionBE> Listar(ConfiguracionBE entidad)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                List<ConfiguracionBE> _lista = new List<ConfiguracionBE>();
+                ConfiguracionBE _be;
 
-        public int Crear(ConfiguracionBE entidad)
-        {
-            throw new NotImplementedException();
+                DataTable _dt = new DataTable();
+
+                _dt = ListarDS(entidad);
+
+                foreach (DataRow item in _dt.Rows)
+                {
+                    _be = new ConfiguracionBE
+                    {
+                        idConfiguracion = (int)item["idConfiguracion"],
+                        urlApi = item["urlApi"].ToString(),
+                        noGrupo = (int)item["noGrupo"]
+                    };
+
+                    _lista.Add(_be);
+                }
+
+                return _lista;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public bool Actualizar(ConfiguracionBE entidad)
         {
             throw new NotImplementedException();
+        }
+        public int Crear(ConfiguracionBE entidad)
+        {
+            try
+            {
+                string sql = "INSERT INTO configuracion SET idConfiguracion = @idConfiguracion, urlApi = @urlApi, " +
+                             "noGrupo = @noGrupo, ";
+
+                CrearComando(sql, CommandType.Text, _conexionSQL);
+
+                CrearParametro("idConfiguracion", entidad.idConfiguracion);
+                AgregarParametro(_idConfiguracion);
+
+                CrearParametro("urlApi", entidad.urlApi);
+                AgregarParametro(_urlApi);
+
+                CrearParametro("noGrupo", entidad.noGrupo);
+                AgregarParametro(_noGrupo);
+
+                _conexionSQL.Open();
+                _comandoSQL.ExecuteNonQuery();
+                _conexionSQL.Close();
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                if (_conexionSQL.State == ConnectionState.Open)
+                    _conexionSQL.Close();
+
+                throw new Exception(ex.Message);
+            }
         }
 
         public bool Eliminar(ConfiguracionBE entidad)

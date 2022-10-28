@@ -16,6 +16,6 @@ namespace trivia_gt.Models
 
         [DisplayName("Numero de Grupo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Debe de indicar el numero de grupo")]
-        public string? noGrupo { get; set; }
+        public int? noGrupo { get; set; }
     }
 }
