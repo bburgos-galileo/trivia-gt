@@ -5,8 +5,8 @@
 }
 
 
-<div class="row m-2">
-    <div class="col-md-10">
+<div class="row m-4">
+    <div class="card-header align-content-center text-center bg-primary d-block">
         <div class="card border-success overflow-auto">
 
             @using (Html.BeginForm("Editar", "Configuracion", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmEditarConfiguracion", role = "form", @autocomplete = "off" }))
@@ -14,18 +14,20 @@
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(model => model.idConfiguracion, new { @id = "hdidConfiguracion" })
 
-                <div class="form-group">
-                    <label asp-for="urlApi" class="control-label"></label>
+                <div class="p-3 border bg-ligh">
+                    <label asp-for="urlApi" class="form-label font-weight-bold text-success"></label>
                     <input asp-for="urlApi" class="form-control" />
                     <span asp-validation-for="urlApi" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="noGrupo" class="control-label"></label>
+                <div class="p-3 border bg-ligh">
+                    <label asp-for="noGrupo" class="form-label font-weight-bold text-success"></label>
                     <input asp-for="noGrupo" class="form-control" />
                     <span asp-validation-for="noGrupo" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                <div class="p-3 border bg-ligh">
+                    <div class="col-md-1 mb-8">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
                 </div>
             }
         </div>
