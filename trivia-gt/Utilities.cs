@@ -11,7 +11,7 @@ namespace trivia_gt
 {
     public static class Utilities
     {
-        public static void CargaPreguntas(this ISession session, int grupo, string url)
+        public static void CargaPreguntas(this ISession session, int? grupo, string? url)
         {
             //http://ec2-44-203-35-246.compute-1.amazonaws.com/preguntas.php?nivel=
 

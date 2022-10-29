@@ -59,7 +59,15 @@ namespace trivia_gt.Controllers
 
             usuarioDAL.Actualizar(entidad);
 
-            Utilities.CargaPreguntas(HttpContext.Session, 1, @"http://ec2-44-203-35-246.compute-1.amazonaws.com/preguntas.php?nivel=");
+            //carga la url del web services
+
+            ConfiguracionDAL configuracionDAL = new();
+
+            List<ConfiguracionBE> _lista = new List<ConfiguracionBE>();
+
+            _lista = configuracionDAL.Listar(new ConfiguracionBE());
+
+            Utilities.CargaPreguntas(HttpContext.Session, _lista[0].noGrupo, _lista[0].urlApi);
 
             return Json(new { success = true, direccion = "/Home/Index" }, new Newtonsoft.Json.JsonSerializerSettings());
         }
