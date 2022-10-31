@@ -67,6 +67,9 @@ namespace trivia_gt.Models
         public List<SelectListItem>? Roles { get; set; }
 
         public List<AvatarBE>? ListaAvatar { get; set; }
+
+        public bool IsEditing { get; set; }
+
     }
 
 }

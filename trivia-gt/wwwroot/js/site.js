@@ -64,3 +64,7 @@ function ShowMensajeInformacion() {
         document.getElementById("iInfo").value = null;
     }
 }
+
+
+
+

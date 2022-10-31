@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using trivia_gt.DAL;
 using trivia_gt.Models;
 
 namespace trivia_gt.Controllers
@@ -61,7 +64,72 @@ namespace trivia_gt.Controllers
 
             ViewBag.IdRol = HttpContext.Session.GetInt32("IdRol");
 
-            return View();
+            if (HttpContext.Session.GetInt32("idRol").Equals(1))
+            {
+                return View();
+
+            } else
+            {
+
+                UsuarioDAL usuarioDAL = new();
+                List<UsuarioBE> listaUsuario = usuarioDAL.Listar(new UsuarioBE());
+
+                string correo = HttpContext.Session.GetString("Correo");
+
+                UsuarioBE usuario = listaUsuario.First(c => c.Correo.Equals(correo));
+
+                listaUsuario.Remove(usuario);
+
+                foreach (UsuarioBE usuarioBE in listaUsuario)
+                {
+                    usuarioBE.Roles = new List<SelectListItem>();
+                    usuarioBE.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador" });
+                    usuarioBE.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador" });
+                }
+
+                return View(listaUsuario);
+            }
+
+        }
+
+
+        [HttpPost]
+        [Produces("application/json")]
+        public IActionResult Actualiza([FromBody] UsuariosBE usuarios)
+        {
+            UsuarioDAL usuarioDAL = new();
+
+            UsuarioBE usuarioBE = new UsuarioBE
+            {
+                Correo = usuarios.Correo,
+                IdRol = usuarios.IdRol,
+                IsEditing = true
+            };
+
+            usuarioDAL.Actualizar(usuarioBE);
+
+            return Json(new { success = true, direccion = "/Home/Index" }, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+
+        [HttpPost]
+        [Produces("application/json")]
+        public IActionResult Grabar([FromBody] List<UsuariosBE> usuarios)
+        {
+            UsuarioDAL usuarioDAL = new();
+
+            foreach (UsuariosBE item in usuarios)
+            {
+                UsuarioBE usuarioBE = new UsuarioBE
+                {
+                    Correo = item.Correo,
+                    IdRol = item.IdRol,
+                    IsEditing = true
+                };
+
+                usuarioDAL.Actualizar(usuarioBE);
+            }
+
+            return Json(new { success = true, direccion = "/Home/Index" }, new Newtonsoft.Json.JsonSerializerSettings());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -89,5 +157,6 @@ namespace trivia_gt.Controllers
 
             return View();
         }
+
     }
 }

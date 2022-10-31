@@ -10,6 +10,7 @@ namespace trivia_gt.DAL
         MySqlCommand _comandoSQL;
 
         MySqlParameter _correo;
+        MySqlParameter _idRol;
 
         public UsuarioDAL()
         {
@@ -37,6 +38,15 @@ namespace trivia_gt.DAL
                         Value = valor
                     };
                     break;
+                case "IdRol":
+                    _idRol = new MySqlParameter
+                    {
+                        ParameterName = "@IdRol",
+                        MySqlDbType = MySqlDbType.Int32,
+                        Direction = ParameterDirection.Input,
+                        Value = valor
+                    };
+                    break;
             }
         }
 
@@ -53,7 +63,7 @@ namespace trivia_gt.DAL
                              "u.contraseña, a.url, DATE_FORMAT(ifnull(u.ultimaConexion, now()), '%d/%m/%Y') ultimaConexion, " +
                              "convert(datediff(now(),ifnull(u.ultimaConexion, now())), char) diasUltimaConn, u.idRol " +
                              "from usuarios u inner join avatar a on u.idAvatar = a.idAvatar " +
-                             "where u.correoElectronico = @Correo";
+                             "where u.correoElectronico = ifnull(@Correo, u.correoElectronico)";
 
                 using (MySqlConnection connection = _conexionSQL)
                 {
@@ -126,12 +136,27 @@ namespace trivia_gt.DAL
         {
             try
             {
-                string sql = "update usuarios set ultimaConexion = now() where correoElectronico = @Correo";
+                string sql = string.Empty;
+
+                if (!entidad.IsEditing)
+                {
+                    sql = "update usuarios set ultimaConexion = now() where correoElectronico = @Correo";
+                }
+                else
+                {
+                    sql = "update usuarios set idRol = @IdRol where correoElectronico = @Correo";
+                }
 
                 CrearComando(sql, CommandType.Text, _conexionSQL);
 
                 CrearParametro("Correo", entidad.Correo);
                 AgregarParametro(_correo);
+
+                if (entidad.IsEditing)
+                {
+                    CrearParametro("IdRol", entidad.IdRol);
+                    AgregarParametro(_idRol);
+                }
 
                 _conexionSQL.Open();
                 _comandoSQL.ExecuteNonQuery();

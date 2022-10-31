@@ -57,6 +57,7 @@ namespace trivia_gt.Controllers
                 HttpContext.Session.Remove("informacion");
             }
 
+            entidad.IsEditing = false;
             usuarioDAL.Actualizar(entidad);
 
             //carga la url del web services

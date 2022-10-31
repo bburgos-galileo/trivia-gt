@@ -1,50 +1,112 @@
-﻿@{
+﻿@model IEnumerable<trivia_gt.Models.UsuarioBE>
+
+@{
     ViewData["Title"] = "Menu";
     string imageLibro = ViewBag.ImagenLibro;
     string imageAnimo = ViewBag.ImagenAnimo;
     string fecha = ViewBag.Fecha;
     int IdRol = ViewBag.IdRol;
+
 }
 
 <div class="text-center">
 
-    <div class="card-group mt-5">
-        <div class="card float-start">
+    @if (IdRol.Equals(1))
+    {
+        <div class="card-group mt-5">
+            <div class="card float-start">
 
-            <figure class="figure">
-                <div class="card-img-top">
-                    <img src="@imageAnimo" class="w-25 figure-img img-fluid rounded">
-                </div>
-                <div class="card-body">
-                    <figcaption class="figure-caption text-success" style=" font-size:large!important">El último día que jugaste fue el @fecha</figcaption>
-                </div>
-            </figure>
+                <figure class="figure">
+                    <div class="card-img-top">
+                        <img src="@imageAnimo" class="w-25 figure-img img-fluid rounded">
+                    </div>
+                    <div class="card-body">
+                        <figcaption class="figure-caption text-success" style=" font-size:large!important">El último día que jugaste fue el @fecha</figcaption>
+                    </div>
+                </figure>
 
+            </div>
+            <div class="card float-end">
+
+                <figure class="figure">
+                    <div class="card-img-top">
+                        <img src="@imageLibro" class="w-25 figure-img img-fluid rounded">
+                    </div>
+                    <div class="card-body">
+                        <figcaption class="figure-caption" style="font-size:large!important">
+                            @if (IdRol == 1)
+                            {
+                                <a class="btn btn-lg btn-success fs-1" href="@Url.Action("Index", "Preguntas")">
+                                    <span class="fs-1"><i class="fa fa-play-circle me-2"></i></span>Jugar
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-lg btn-success fs-1" href="#">
+                                    <span class="fs-1"><i class="fa fa-play-circle me-2"></i></span>Jugar
+                                </a>
+                            }
+
+                        </figcaption>
+                    </div>
+                </figure>
+
+            </div>
         </div>
-        <div class="card float-end">
+    }
+    else
+    {
+        @using (Html.BeginForm("Grabar", "Home", FormMethod.Post, new { @class = "form-horizontal bg-light", Id = "frmTablaUsuarios", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
 
-            <figure class="figure">
-                <div class="card-img-top">
-                    <img src="@imageLibro" class="w-25 figure-img img-fluid rounded">
-                </div>
+            <div class="card mt-5">
                 <div class="card-body">
-                    <figcaption class="figure-caption" style="font-size:large!important">
-                       @if(IdRol == 1){
-                            <a class="btn btn-lg btn-success fs-1" href="@Url.Action("Index", "Preguntas")">
-                                <span class="fs-1"><i class="fa fa-play-circle me-2"></i></span>Jugar
-                            </a>
-                       }
-                       else{
-                            <a class="btn btn-lg btn-success fs-1" href="#">
-                                <span class="fs-1"><i class="fa fa-play-circle me-2"></i></span>Jugar
-                            </a>
-                       }
-                   
-                     </figcaption>
-                </div>
-            </figure>
+                    <table id="tblLista" class="table table-responsive-md table-striped table-hover table-borderless">
+                        <thead>
+                            <tr class="bg-success text-white">
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nombres)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Apellidos)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Correo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdRol)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                int i = 0;
 
-        </div>
-    </div>
+                                <tr>
+                                    <td class="text-start">@item.Nombres</td>
+                                    <td class="text-start">@item.Apellidos</td>
+                                    <td class="text-start">@item.Correo</td>
+                                    <td>@Html.DropDownListFor(model => item.IdRol, item.Roles, new { @class = "form-select form-select-sm cmbRol", id = "IdRol", name = "IdRol"})</td>
+                                    <td>
+                                        <input type="button" value="Cambiar" id="btnGuardar" class="btn btn-sm btn-outline-warning btnSelect" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer bg-warning mt-2">
+                    <div class="text-end">
+                        <input type="button" class="btn btn-outline-primary" value="Grabar" onclick="ActualizarUsuarios()" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
 
 </div>
+
+
