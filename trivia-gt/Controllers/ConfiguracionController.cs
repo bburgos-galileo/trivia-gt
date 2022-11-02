@@ -70,7 +70,7 @@ namespace trivia_gt.Controllers
                 configuracionDAL.Actualizar(entidad);
             }
 
-            return Redirect("/Home/Index");
+            return Redirect("/Login/Logout");
         }
 
         private bool IsWebsiteUp_Get(string url)

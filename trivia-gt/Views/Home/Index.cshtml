@@ -60,7 +60,10 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="card mt-5">
+            <div class="card mt-5 border border-warning border-2">
+                <div class="card-header bg-primary">
+                    <h5 class="card-title text-white">Listado de Usuarios</h5>
+                </div>
                 <div class="card-body">
                     <table id="tblLista" class="table table-responsive-md table-striped table-hover table-borderless">
                         <thead>
