@@ -10,6 +10,7 @@ namespace trivia_gt.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -74,6 +75,11 @@ namespace trivia_gt.Controllers
                 UsuarioDAL usuarioDAL = new();
                 List<UsuarioBE> listaUsuario = usuarioDAL.Listar(new UsuarioBE());
 
+                PunteoBE punteoBE = new();
+
+                PunteoDAL punteoDAL = new();
+                List<PunteoBE> listaPunteo = punteoDAL.Listar(new PunteoBE());
+
                 string correo = HttpContext.Session.GetString("Correo");
 
                 UsuarioBE usuario = listaUsuario.First(c => c.Correo.Equals(correo));
@@ -82,12 +88,67 @@ namespace trivia_gt.Controllers
 
                 foreach (UsuarioBE usuarioBE in listaUsuario)
                 {
+                    if (listaPunteo.Exists(p => p.Correo.Equals(usuarioBE.Correo)))
+                    {
+                        usuarioBE.punteoBE = new();
+                        usuarioBE.punteoBE = listaPunteo.First(p => p.Correo.Equals(usuarioBE.Correo));
+
+                        switch (int.Parse(usuarioBE.punteoBE.Punteo) switch
+                        {
+                            5 or 10 => 1,
+                            15 or 20 => 2,
+                            25 or 30 => 3,
+                            35 or 40 or 45 => 4,
+                            50 => 5,
+                            _ => 0,
+                        })
+                        {
+                            case 1:
+                                usuarioBE.punteoBE.estrella1 = 1;
+                                usuarioBE.Orden = 1;
+                                break;
+                            case 2:
+                                usuarioBE.punteoBE.estrella1 = 1;
+                                usuarioBE.punteoBE.estrella2 = 1;
+                                usuarioBE.Orden = 2;
+                                break;
+                            case 3:
+                                usuarioBE.punteoBE.estrella1 = 1;
+                                usuarioBE.punteoBE.estrella2 = 1;
+                                usuarioBE.punteoBE.estrella3 = 1;
+                                usuarioBE.Orden = 3;
+                                break;
+                            case 4:
+                                usuarioBE.punteoBE.estrella1 = 1;
+                                usuarioBE.punteoBE.estrella2 = 1;
+                                usuarioBE.punteoBE.estrella3 = 1;
+                                usuarioBE.punteoBE.estrella4 = 1;
+                                usuarioBE.Orden = 4;
+                                break;
+                            case 5:
+                                usuarioBE.punteoBE.estrella1 = 1;
+                                usuarioBE.punteoBE.estrella2 = 1;
+                                usuarioBE.punteoBE.estrella3 = 1;
+                                usuarioBE.punteoBE.estrella4 = 1;
+                                usuarioBE.punteoBE.estrella5 = 1;
+                                usuarioBE.Orden = 5;
+                                break;
+                            default:
+                                break;
+                        }
+
+                    } else
+                    {
+                        usuarioBE.punteoBE = new();
+                        usuarioBE.punteoBE.Punteo = "0";
+                    }
+
                     usuarioBE.Roles = new List<SelectListItem>();
                     usuarioBE.Roles.Add(new SelectListItem { Value = "1", Text = "Jugador" });
                     usuarioBE.Roles.Add(new SelectListItem { Value = "2", Text = "Administrador" });
                 }
 
-                return View(listaUsuario);
+                return View(listaUsuario.OrderByDescending(o => o.Orden).ToList());
             }
 
         }
@@ -97,7 +158,9 @@ namespace trivia_gt.Controllers
         [Produces("application/json")]
         public IActionResult Actualiza([FromBody] UsuariosBE usuarios)
         {
+
             UsuarioDAL usuarioDAL = new();
+           
 
             UsuarioBE usuarioBE = new UsuarioBE
             {

@@ -50,8 +50,8 @@ namespace trivia_gt.DAL
         {
             try
             {
-                string sql = "SELECT SUM(p.punteo) punteo, count(p.idPregunta) preguntas, u.correoElectronico " + 
-                             "FROM punteo p inner join usuarios u on p.idUsuario = u.idUsuario group by u.correoElectronico";
+                string sql = "SELECT convert(SUM(p.punteo), char) punteo, convert(count(p.idPregunta), char) preguntas, u.correoElectronico correo " +
+                             "FROM punteo p inner join usuarios u on p.idUsuario = u.idUsuario where p.idEstado = 1 group by u.correoElectronico";
 
                 using (MySqlConnection connection = _conexionSQL)
                 {
@@ -94,8 +94,9 @@ namespace trivia_gt.DAL
                 {
                     _be = new PunteoBE
                     {
-                        Punteo = (int)item["Punteo"],
-                        TotalPreguntas = (int)item["TotalPreguntas"],
+                        Punteo = item["punteo"].ToString(),
+                        TotalPreguntas = item["preguntas"].ToString(),
+                        Correo = item["correo"].ToString(),
                     };
 
                     _lista.Add(_be);

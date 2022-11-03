@@ -97,13 +97,48 @@
                                     <td>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="ratings">
-                                                <i class="fa fa-star rating-color"></i>
-                                                <i class="fa fa-star rating-color"></i>
-                                                <i class="fa fa-star rating-color"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                                @if (@item.punteoBE.estrella1.Equals(1))
+                                                {
+                                                    <i class="fa fa-star rating-color"></i>
+                                                } else
+                                                {
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                }
+                                                @if (@item.punteoBE.estrella2.Equals(1))
+                                                {
+                                                    <i class="fa fa-star rating-color"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                }
+                                                @if (@item.punteoBE.estrella3.Equals(1))
+                                                {
+                                                    <i class="fa fa-star rating-color"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                }
+                                                @if (@item.punteoBE.estrella4.Equals(1))
+                                                {
+                                                    <i class="fa fa-star rating-color"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                }
+                                                @if (@item.punteoBE.estrella5.Equals(1))
+                                                {
+                                                    <i class="fa fa-star rating-color"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                }
+                                                
                                             </div>
-                                            <h5 class="review-count">5</h5>
+                                            <h5 class="text-success"> @item.punteoBE.Punteo</h5>
                                         </div>
                                     </td>
                                     <td>

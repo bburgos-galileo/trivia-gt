@@ -72,6 +72,8 @@ namespace trivia_gt.Models
 
         public PunteoBE punteoBE { get; set; }
 
+        public int Orden { get; set; }
+
     }
 
 }

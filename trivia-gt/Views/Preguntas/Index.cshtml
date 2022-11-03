@@ -3,7 +3,7 @@
 <hr class="bg-success" />
 <div class="row">
     <div class="col-md-12">
-        <div class="card border-success">
+        <div class="card border border-warning border-2">
             @using (Html.BeginForm("Grabar", "Preguntas", FormMethod.Post, new { @class = "form-floating", Id = "frmPreguntas" }))
             {
                 @Html.HiddenFor(model => model.idPregunta, new { @id = "hdIdPregunta" })
@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="card-footer bg-light">
+                <div class="card-footer bg-warning">
                     <div class="text-end">
                             <input id="btnGrabar" onclick="GrabarPregunta()" type="button" value="Validar" class="btn btn-lg btn-group-lg btn-outline-primary" />
                             <a href="@Url.Action("Index", "Home")" class="btn btn-lg btn-group-lg btn-outline-success ms-2">Salir</a>

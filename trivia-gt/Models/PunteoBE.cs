@@ -2,8 +2,8 @@
 {
     public class PunteoBE
     {
-        public int Punteo { get; set; }
-        public int TotalPreguntas { get; set; }
+        public string Punteo { get; set; }
+        public string TotalPreguntas { get; set; }
 
         public string Correo { get; set; }
 
