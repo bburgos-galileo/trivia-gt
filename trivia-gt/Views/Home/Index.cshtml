@@ -80,6 +80,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.IdRol)
                                 </th>
+                                <th>Clasificación</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -93,6 +94,18 @@
                                     <td class="text-start">@item.Apellidos</td>
                                     <td class="text-start">@item.Correo</td>
                                     <td>@Html.DropDownListFor(model => item.IdRol, item.Roles, new { @class = "form-select form-select-sm cmbRol", id = "IdRol", name = "IdRol"})</td>
+                                    <td>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="ratings">
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <h5 class="review-count">5</h5>
+                                        </div>
+                                    </td>
                                     <td>
                                         <input type="button" value="Cambiar" id="btnGuardar" class="btn btn-sm btn-outline-warning btnSelect" />
                                     </td>

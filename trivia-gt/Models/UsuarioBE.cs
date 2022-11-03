@@ -70,6 +70,8 @@ namespace trivia_gt.Models
 
         public bool IsEditing { get; set; }
 
+        public PunteoBE punteoBE { get; set; }
+
     }
 
 }
